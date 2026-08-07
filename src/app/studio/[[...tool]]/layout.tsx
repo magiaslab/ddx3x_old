@@ -5,5 +5,19 @@ export default function StudioLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        height: "100vh",
+        width: "100vw",
+        overflow: "auto",
+        zIndex: 50,
+        background: "#fff",
+      }}
+    >
+      {children}
+    </div>
+  );
 }

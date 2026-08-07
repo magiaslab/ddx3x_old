@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import { Source_Sans_3 } from "next/font/google";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { Lora, Work_Sans } from "next/font/google";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
+const workSans = Work_Sans({
+  variable: "--font-work-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const lora = Lora({
+  variable: "--font-lora",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
@@ -33,12 +39,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="it" className={`${sourceSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans">
-        <Header />
-        {children}
-        <Footer />
-      </body>
+    <html
+      lang="it"
+      className={`${workSans.variable} ${lora.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );
 }

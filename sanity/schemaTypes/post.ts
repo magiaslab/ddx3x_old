@@ -1,4 +1,5 @@
 import { defineType, defineField } from "sanity";
+import { portableBodyField } from "./portableBody";
 
 export const post = defineType({
   name: "post",
@@ -25,53 +26,7 @@ export const post = defineType({
       rows: 3,
       description: "Breve riassunto per le card in home e nell'elenco novità",
     }),
-    defineField({
-      name: "body",
-      title: "Contenuto",
-      type: "array",
-      of: [
-        {
-          type: "block",
-          styles: [
-            { title: "Normale", value: "normal" },
-            { title: "Titolo 2", value: "h2" },
-            { title: "Titolo 3", value: "h3" },
-            { title: "Citazione", value: "blockquote" },
-          ],
-          lists: [
-            { title: "Elenco", value: "bullet" },
-            { title: "Numerato", value: "number" },
-          ],
-          marks: {
-            decorators: [
-              { title: "Grassetto", value: "strong" },
-              { title: "Corsivo", value: "em" },
-            ],
-            annotations: [
-              {
-                name: "link",
-                type: "object",
-                title: "Link",
-                fields: [
-                  {
-                    name: "href",
-                    type: "url",
-                    title: "URL",
-                    validation: (Rule) =>
-                      Rule.uri({ allowRelative: true, scheme: ["http", "https", "mailto"] }),
-                  },
-                ],
-              },
-            ],
-          },
-        },
-        {
-          type: "image",
-          options: { hotspot: true },
-          fields: [{ name: "alt", type: "string", title: "Testo alternativo" }],
-        },
-      ],
-    }),
+    portableBodyField,
     defineField({
       name: "coverImage",
       title: "Immagine di copertina",

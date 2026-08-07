@@ -8,7 +8,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 
 export default defineConfig({
   name: "ddx3x",
-  title: "DDX3X Italia — Novità",
+  title: "DDX3X Italia — CMS",
   projectId,
   dataset,
   basePath: "/studio",
