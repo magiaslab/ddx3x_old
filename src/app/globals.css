@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fafaf9;
+  --foreground: #1c1917;
+  --muted: #78716c;
+  --border: #e7e5e4;
+  --accent: #292524;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-source-sans);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-source-sans), "Segoe UI", sans-serif;
+}
+
+.prose-ddx {
+  color: #44403c;
+  line-height: 1.7;
+}
+
+.prose-ddx h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #1c1917;
+}
+
+.prose-ddx h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1c1917;
+}
+
+.prose-ddx p {
+  margin-bottom: 1rem;
+}
+
+.prose-ddx ul {
+  margin: 0.75rem 0 1rem 1.25rem;
+  list-style: disc;
+}
+
+.prose-ddx ol {
+  margin: 0.75rem 0 1rem 1.25rem;
+  list-style: decimal;
+}
+
+.prose-ddx li {
+  margin-bottom: 0.35rem;
+}
+
+.prose-ddx a {
+  color: #1c1917;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose-ddx img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.25rem;
+  margin: 1rem 0;
+}
+
+.prose-ddx strong {
+  color: #1c1917;
+  font-weight: 600;
+}
+
+.prose-ddx em {
+  font-style: italic;
+}

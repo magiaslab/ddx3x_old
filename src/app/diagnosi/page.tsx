@@ -1,0 +1,15 @@
+import type { Metadata } from "next";
+import { PageShell } from "@/components/PageShell";
+
+export const metadata: Metadata = {
+  title: "Diagnosi",
+  description: "Come si arriva alla diagnosi di mutazione del gene DDX3X.",
+};
+
+export default function Page() {
+  return (
+    <PageShell title={"Diagnosi"} description={"Come si arriva alla diagnosi di mutazione del gene DDX3X."}>
+      <div dangerouslySetInnerHTML={{ __html: "<p>Arrivare alla diagnosi di mutazione del gene <em>DDX3X</em> è spesso un percorso lungo e complesso, che inizia con i primi segnali di sviluppo atipico e si completa grazie alle indagini genetiche approfondite. La sindrome è rara e ancora poco conosciuta, e per questo la diagnosi può richiedere tempo e il coinvolgimento di più specialisti.</p>\n\n<h2><strong>Quando iniziano i dubbi?</strong></h2>\n\n<p>Nella maggior parte dei casi, i genitori iniziano a notare differenze nel ritmo di sviluppo del proprio bambino nei primi mesi o anni di vita. Tra i segnali più comuni:</p>\n\n<ul>\n<li>ritardi nelle tappe motorie (camminare, stare seduti)</li>\n\n<li>difficoltà nella comunicazione e nel linguaggio</li>\n\n<li>ipotonia (tono muscolare ridotto)</li>\n\n<li>comportamenti ripetitivi o difficoltà nella relazione</li>\n</ul>\n\n<p>Questi segnali portano spesso a consultare il pediatra, il neuropsichiatra infantile o altri specialisti.</p>\n\n<h2><strong>Il ruolo degli esami genetici</strong></h2>\n\n<p>Dopo una prima fase di valutazione clinica e funzionale, il medico può proporre esami genetici di secondo livello, come:</p>\n\n<ul>\n<li><strong>array-CGH </strong>(cariotipo molecolare)</li>\n\n<li><strong>pannelli di geni correlati a disabilità intellettiva</strong></li>\n\n<li><strong>sequenziamento dell’esoma (WES)</strong></li>\n</ul>\n\n<p>È attraverso il sequenziamento dell’esoma che nella maggior parte dei casi viene identificata una <strong>mutazione de novo del gene DDX3X</strong>, situato sul cromosoma X. Questo tipo di alterazione non è ereditato dai genitori nella grande maggioranza dei casi, ma compare “ex novo” durante la formazione dell’embrione.</p>\n\n<h2><strong>Cosa significa avere una diagnosi?</strong></h2>\n\n<p>Ricevere una diagnosi genetica, seppur difficile da accettare, rappresenta per molte famiglie un punto di svolta:</p>\n\n<ul>\n<li>consente di<strong> dare un nome</strong> alle difficoltà del bambino</li>\n\n<li>permette di <strong>accedere a percorsi riabilitativi e scolastici mirati</strong></li>\n\n<li>facilita l’ingresso in una <strong>rete di famiglie e specialisti</strong></li>\n\n<li>apre la porta alla partecipazione a studi scientifici e progetti internazionali</li>\n</ul>\n\n<p>L’Associazione DDX3X Italia ODV accompagna le famiglie in questo percorso, offrendo ascolto, supporto e informazione affidabile.</p>\n\n<a class=\"btn-link\" href=\"https://docs.google.com/forms/d/e/1FAIpQLSc0woyJ0t0kTGBHUStwah_i7BnNLzcBoo8-PX0TJisSjtWmxA/viewform\">Quando la diagnosi tarda ad arrivare o sospettiamo sia errata</a>\n\n<p></p>" }} />
+    </PageShell>
+  );
+}
