@@ -41,8 +41,8 @@ export default async function HomePage() {
           aria-hidden
           className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[70%_center] sm:object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(251,249,245,.92)] via-[rgba(251,249,245,.88)] to-[var(--sand-50)] sm:bg-gradient-to-r sm:from-[rgba(251,249,245,.94)] sm:via-[rgba(251,249,245,.82)] sm:to-[rgba(247,244,252,.45)]" />
-        <div className="absolute inset-0 hidden bg-gradient-to-t from-[var(--sand-50)] via-transparent to-[rgba(251,249,245,.35)] sm:block" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(251,249,245,.62)] via-[rgba(251,249,245,.38)] to-[var(--sand-50)] sm:bg-gradient-to-r sm:from-[rgba(251,249,245,.78)] sm:via-[rgba(251,249,245,.42)] sm:to-[rgba(251,249,245,.08)]" />
+        <div className="absolute inset-0 hidden bg-gradient-to-t from-[var(--sand-50)] via-transparent to-transparent sm:block" />
 
         <div className="relative mx-auto max-w-[1240px]">
           <div className="max-w-[640px]">
