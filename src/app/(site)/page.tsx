@@ -15,6 +15,14 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} — Insieme per la Sindrome DDX3X`,
     description: siteConfig.description,
     url: "/",
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 512,
+        height: 512,
+        alt: siteConfig.name,
+      },
+    ],
   },
 };
 
