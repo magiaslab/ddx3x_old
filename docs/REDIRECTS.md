@@ -14,6 +14,8 @@
 1539  → /ricerca/mondo
 676   → /pubblicazioni
 1162  → /eventi/conferenza-internazionale
+1890  → /eventi/conferenza-internazionale
+2210  → /novita/studio-napoli-n-acetilcisteina
 1547  → /dona
 1549  → /dona/campagne
 230   → /dona

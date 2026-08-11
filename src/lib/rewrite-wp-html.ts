@@ -22,7 +22,12 @@ export function rewriteWpHtml(html: string): string {
     .replace(/\?(page_id|p)=(\d+)/gi, (_m, kind: string, id: string) =>
       resolveLegacyId(kind, id),
     )
-    .replace(/https?:\/\/(?:www\.)?ddx3x\.it(?=\/|"|'|\s|>|$)/gi, "");
+    .replace(/https?:\/\/(?:www\.)?ddx3x\.it(?=\/|"|'|\s|>|$)/gi, "")
+    // After domain strip, protocol-relative "//path" must become absolute "/path"
+    .replace(
+      /(href|src)=(["'])\/\/(?!\/)/gi,
+      (_m, attr: string, q: string) => `${attr}=${q}/`,
+    );
 }
 
 function resolveLegacyId(kind: string, id: string): string {
