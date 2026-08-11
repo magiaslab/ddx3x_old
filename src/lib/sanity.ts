@@ -36,7 +36,8 @@ export const sanityClient = isSanityConfigured
       projectId: projectId!,
       dataset,
       apiVersion,
-      useCdn: true,
+      // false: token + build SSG devono leggere il documento aggiornato (no CDN stale)
+      useCdn: false,
       token: process.env.SANITY_API_READ_TOKEN,
     })
   : null;
