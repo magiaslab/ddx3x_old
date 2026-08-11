@@ -222,6 +222,57 @@ export default async function HomePage() {
         </section>
       ) : null}
 
+      <section className="px-4 pb-16 sm:px-6 sm:pb-24 md:px-8">
+        <div className="mx-auto max-w-[1240px]">
+          <div className="mb-6 max-w-[640px] sm:mb-8">
+            <span className="text-[13px] font-semibold uppercase tracking-[0.04em] text-[var(--green-700)]">
+              Ricerca in Italia
+            </span>
+            <h2 className="mb-2.5 mt-3 font-serif text-[24px] font-semibold text-[var(--ink)] sm:text-[28px]">
+              Due progetti che fanno avanzare la conoscenza sulla DDX3X
+            </h2>
+            <p className="m-0 text-[15px] leading-relaxed text-[var(--gray-600)]">
+              Dalla N-acetilcisteina a Napoli al Seed Grant Telethon con il
+              dott. Alfredo Brusco: la ricerca italiana è in movimento.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
+            <div className="flex flex-col rounded-[22px] border border-[#DCEBD3] bg-[var(--green-50)] p-6 sm:rounded-3xl sm:p-8">
+              <h3 className="mb-2.5 font-serif text-[20px] font-semibold text-[var(--ink)] sm:text-[22px]">
+                Studio di Napoli sulla N-acetilcisteina
+              </h3>
+              <p className="mb-6 flex-1 text-[14.5px] leading-relaxed text-[var(--gray-600)] sm:text-[15px]">
+                All’Università Federico II il team della dott.ssa Simona
+                Fecarotta presenta i risultati preliminari di uno studio
+                osservazionale sulla NAC.
+              </p>
+              <Link
+                href="/novita/studio-napoli-n-acetilcisteina"
+                className="inline-flex w-full items-center justify-center rounded-full bg-[var(--green-600)] px-6 py-3 text-[14.5px] font-semibold text-white no-underline hover:bg-[var(--green-700)] sm:w-auto"
+              >
+                Leggi lo studio →
+              </Link>
+            </div>
+            <div className="flex flex-col rounded-[22px] border border-[var(--border)] bg-white p-6 sm:rounded-3xl sm:p-8">
+              <h3 className="mb-2.5 font-serif text-[20px] font-semibold text-[var(--ink)] sm:text-[22px]">
+                Fondazione Telethon e dott. Alfredo Brusco
+              </h3>
+              <p className="mb-6 flex-1 text-[14.5px] leading-relaxed text-[var(--gray-600)] sm:text-[15px]">
+                Il primo progetto italiano sulla DDX3X finanziato
+                dall’Associazione tramite Seed Grant Telethon, all’Università
+                di Torino.
+              </p>
+              <Link
+                href="/ricerca/italia#telethon-brusco"
+                className="inline-flex w-full items-center justify-center rounded-full border border-[var(--ink)] bg-transparent px-6 py-3 text-[14.5px] font-semibold text-[var(--ink)] no-underline hover:bg-[var(--sand-50)] sm:w-auto"
+              >
+                Scopri il progetto →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <LatestNews posts={posts} />
 
       {SHOW_MAP ? (
