@@ -10,6 +10,12 @@ export const metadata: Metadata = {
     absolute: `${siteConfig.name} — Insieme per la Sindrome DDX3X`,
   },
   description: siteConfig.description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: `${siteConfig.name} — Insieme per la Sindrome DDX3X`,
+    description: siteConfig.description,
+    url: "/",
+  },
 };
 
 const SHOW_CONFERENCE_BANNER = true;
@@ -39,6 +45,8 @@ export default async function HomePage() {
           src={HERO_BG}
           alt=""
           aria-hidden
+          fetchPriority="high"
+          decoding="async"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[70%_center] sm:object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(251,249,245,.62)] via-[rgba(251,249,245,.38)] to-[var(--sand-50)] sm:bg-gradient-to-r sm:from-[rgba(251,249,245,.78)] sm:via-[rgba(251,249,245,.42)] sm:to-[rgba(251,249,245,.08)]" />
@@ -46,7 +54,7 @@ export default async function HomePage() {
 
         <div className="relative mx-auto max-w-[1240px]">
           <div className="max-w-[640px]">
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#EAF5E4] px-3 py-1.5 text-[12px] font-semibold tracking-[0.04em] text-[var(--green-600)] sm:mb-5 sm:text-[13px]">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#EAF5E4] px-3 py-1.5 text-[12px] font-semibold tracking-[0.04em] text-[var(--green-700)] sm:mb-5 sm:text-[13px]">
               Associazione DDX3X Italia ODV
             </span>
             <h1 className="mb-4 font-serif text-[1.85rem] font-semibold leading-[1.18] text-[var(--ink)] sm:mb-5 sm:text-4xl md:text-[48px] md:leading-[1.14]">
@@ -113,9 +121,9 @@ export default async function HomePage() {
             <span className="text-[12px] font-semibold uppercase tracking-[0.05em] text-[#C3B3E8] sm:text-[13px]">
               Campagna 2026
             </span>
-            <h3 className="mb-2.5 mt-3 font-serif text-[22px] font-semibold sm:mt-3.5 sm:text-[26px]">
+            <h2 className="mb-2.5 mt-3 font-serif text-[22px] font-semibold sm:mt-3.5 sm:text-[26px]">
               Obiettivo raccolta fondi per la ricerca
-            </h3>
+            </h2>
             <p className="mb-6 max-w-[460px] text-[14.5px] leading-relaxed text-[#D8CFEA] sm:mb-7 sm:text-[15px]">
               Ogni contributo finanzia direttamente i progetti di ricerca sulla
               sindrome DDX3X e il supporto alle famiglie.
@@ -147,24 +155,24 @@ export default async function HomePage() {
 
           <div className="flex flex-col justify-between rounded-[22px] border border-[var(--amber-border)] bg-[var(--amber-tint)] p-6 sm:rounded-3xl sm:p-9">
             <div>
-              <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--amber-500)] text-xl text-white">
-                ♥
+              <span className="mb-3 text-[12px] font-semibold uppercase tracking-[0.05em] text-[#6B4F12] sm:text-[13px]">
+                Dichiarazione dei redditi
               </span>
-              <h3 className="mb-2.5 font-serif text-[20px] font-semibold text-[var(--ink)] sm:text-[21px]">
+              <h2 className="mb-2.5 font-serif text-[20px] font-semibold text-[var(--ink)] sm:text-[21px]">
                 Dona il tuo 5×1000
-              </h3>
-              <p className="mb-5 text-[14.5px] leading-relaxed text-[#6B5C3E]">
+              </h2>
+              <p className="mb-5 text-[14.5px] leading-relaxed text-[#5C4E32]">
                 Non ti costa nulla: indica il nostro codice fiscale nella
                 dichiarazione dei redditi.
               </p>
             </div>
             <div>
-              <div className="mb-4 break-all rounded-xl border border-dashed border-[#E0C27A] bg-white px-3 py-3 font-mono text-[14px] tracking-wide text-[#8A6A1F] sm:px-4 sm:text-[15px]">
+              <div className="mb-4 break-all rounded-xl border border-dashed border-[#E0C27A] bg-white px-3 py-3 font-mono text-[14px] tracking-wide text-[#6B4F12] sm:px-4 sm:text-[15px]">
                 {BANK_DETAILS.codiceFiscale}
               </div>
               <Link
                 href="/dona"
-                className="text-[14.5px] font-semibold text-[#8A6A1F] no-underline hover:text-[#5F4A16]"
+                className="text-[14.5px] font-semibold text-[#6B4F12] no-underline hover:text-[#4A360C]"
               >
                 Scopri come fare →
               </Link>
@@ -188,9 +196,9 @@ export default async function HomePage() {
               <span className="text-[13px] font-semibold uppercase tracking-[0.04em] text-[var(--purple-600)]">
                 In evidenza
               </span>
-              <h3 className="my-1.5 font-serif text-[20px] font-semibold text-[var(--ink)] sm:text-[22px]">
+              <h2 className="my-1.5 font-serif text-[20px] font-semibold text-[var(--ink)] sm:text-[22px]">
                 3° Conferenza Internazionale DDX3X
-              </h3>
+              </h2>
               <p className="m-0 text-[14.5px] text-[var(--gray-600)]">
                 Famiglie, professionisti, ricercatori e caregiver insieme per
                 condividere conoscenza, esperienze e prospettive.
@@ -212,7 +220,7 @@ export default async function HomePage() {
         <section className="px-4 pb-16 sm:px-6 sm:pb-24 md:px-8">
           <div className="mx-auto grid max-w-[1240px] items-center gap-7 rounded-[22px] border border-[#DCEBD3] bg-[var(--green-50)] p-6 sm:gap-9 sm:rounded-3xl sm:p-10 md:grid-cols-2">
             <div>
-              <span className="text-[13px] font-semibold uppercase tracking-[0.04em] text-[var(--green-600)]">
+              <span className="text-[13px] font-semibold uppercase tracking-[0.04em] text-[var(--green-700)]">
                 Rete nazionale
               </span>
               <h2 className="mb-3.5 mt-3 font-serif text-[24px] font-semibold text-[var(--ink)] sm:text-[28px]">
@@ -259,7 +267,7 @@ function QuickCard({
   return (
     <Link
       href={href}
-      className="flex flex-col gap-3.5 rounded-[18px] border border-[var(--border)] bg-white p-5 text-[var(--ink)] no-underline shadow-[0_1px_2px_rgba(40,25,60,.04)] transition hover:-translate-y-0.5 hover:border-[#D9CBEF] hover:shadow-[0_10px_26px_rgba(80,50,120,.1)] sm:gap-4 sm:rounded-[20px] sm:p-8"
+      className="flex flex-col gap-3.5 rounded-[18px] border border-[var(--border)] bg-white p-5 text-[var(--ink)] no-underline transition hover:-translate-y-0.5 hover:border-[#D9CBEF] sm:gap-4 sm:rounded-[20px] sm:p-8"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -268,9 +276,9 @@ function QuickCard({
         className="h-14 w-14 rounded-[12px] object-contain sm:h-[72px] sm:w-[72px] sm:rounded-[14px]"
       />
       <div>
-        <h3 className="mb-2 font-serif text-lg font-semibold text-[var(--ink)] sm:text-xl">
+        <h2 className="mb-2 font-serif text-lg font-semibold text-[var(--ink)] sm:text-xl">
           {title}
-        </h3>
+        </h2>
         <p className="m-0 text-[14.5px] leading-relaxed text-[var(--gray-600)] sm:text-[15px]">
           {body}
         </p>

@@ -9,11 +9,7 @@ const portableComponents: PortableTextComponents = {
     h2: ({ children }) => <h2>{children}</h2>,
     h3: ({ children }) => <h3>{children}</h3>,
     normal: ({ children }) => <p>{children}</p>,
-    blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-[var(--purple-100)] pl-4 italic text-[var(--gray-600)]">
-        {children}
-      </blockquote>
-    ),
+    blockquote: ({ children }) => <blockquote>{children}</blockquote>,
   },
   marks: {
     link: ({ children, value }) => {

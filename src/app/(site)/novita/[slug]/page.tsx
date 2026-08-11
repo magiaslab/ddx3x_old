@@ -26,11 +26,7 @@ const portableComponents: PortableTextComponents = {
     h2: ({ children }) => <h2>{children}</h2>,
     h3: ({ children }) => <h3>{children}</h3>,
     normal: ({ children }) => <p>{children}</p>,
-    blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-[var(--purple-100)] pl-4 italic text-[var(--gray-600)]">
-        {children}
-      </blockquote>
-    ),
+    blockquote: ({ children }) => <blockquote>{children}</blockquote>,
   },
   marks: {
     link: ({ children, value }) => (
@@ -53,7 +49,7 @@ export default async function PostPage({ params }: Props) {
       : null);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14 md:px-8">
+    <main className="mx-auto max-w-[40rem] px-4 py-10 sm:px-6 sm:py-14 md:px-8">
       <header className="mb-7 border-b border-[var(--border)] pb-5 sm:mb-8 sm:pb-6">
         <CategoryBadge category={post.category} />
         <h1 className="mt-3 font-serif text-[1.65rem] font-semibold tracking-tight text-[var(--ink)] sm:text-3xl md:text-[2rem]">
@@ -74,7 +70,7 @@ export default async function PostPage({ params }: Props) {
           className="mb-8 w-full rounded-[18px] object-cover"
         />
       ) : null}
-      <div className="prose-ddx">
+      <div className="prose-ddx max-w-[65ch]">
         <PortableText value={post.body} components={portableComponents} />
       </div>
     </main>

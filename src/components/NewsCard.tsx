@@ -26,9 +26,9 @@ const categoryStyles: Record<
   PostCategory,
   { label: string; color: string; bg: string }
 > = {
-  campagna: { label: "Campagna", color: "#8A6A1F", bg: "#FBF0D8" },
+  campagna: { label: "Campagna", color: "#6B4F12", bg: "#FBF0D8" },
   evento: { label: "Evento", color: "#54407F", bg: "#EDE7F6" },
-  comunicato: { label: "Comunicato", color: "#3E7D34", bg: "#E3F2DE" },
+  comunicato: { label: "Comunicato", color: "#2F6A28", bg: "#E3F2DE" },
 };
 
 export function CategoryBadge({ category }: { category: PostCategory }) {
@@ -49,12 +49,19 @@ function coverUrl(post: Post) {
   return null;
 }
 
-export function NewsCard({ post }: { post: Post }) {
+export function NewsCard({
+  post,
+  headingLevel = "h2",
+}: {
+  post: Post;
+  headingLevel?: "h2" | "h3";
+}) {
   const img = coverUrl(post);
+  const Title = headingLevel;
   return (
     <Link
       href={`/novita/${post.slug}`}
-      className="flex flex-col overflow-hidden rounded-[18px] border border-[var(--border)] bg-white text-[var(--ink)] no-underline transition hover:border-[#D9CBEF] hover:shadow-[0_10px_24px_rgba(80,50,120,.08)]"
+      className="flex flex-col overflow-hidden rounded-[18px] border border-[var(--border)] bg-white text-[var(--ink)] no-underline transition hover:border-[#D9CBEF]"
     >
       {img ? (
         // eslint-disable-next-line @next/next/no-img-element
@@ -64,15 +71,15 @@ export function NewsCard({ post }: { post: Post }) {
           className="aspect-video w-full object-cover"
         />
       ) : (
-        <div className="flex aspect-video w-full items-center justify-center bg-[var(--purple-50)] text-sm text-[var(--purple-600)]">
+        <div className="flex aspect-video w-full items-center justify-center bg-[var(--purple-50)] text-sm font-medium text-[var(--purple-700)]">
           Novità
         </div>
       )}
       <div className="flex flex-1 flex-col gap-2.5 p-5">
         <CategoryBadge category={post.category} />
-        <h3 className="font-serif text-[16.5px] font-semibold leading-snug text-[var(--ink)]">
+        <Title className="font-serif text-[16.5px] font-semibold leading-snug text-[var(--ink)]">
           {post.title}
-        </h3>
+        </Title>
         {post.excerpt ? (
           <p className="line-clamp-3 flex-1 text-[13.5px] leading-relaxed text-[var(--gray-600)]">
             {post.excerpt}
@@ -107,7 +114,7 @@ export function LatestNews({ posts }: { posts: Post[] }) {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {posts.map((post) => (
-            <NewsCard key={post._id} post={post} />
+            <NewsCard key={post._id} post={post} headingLevel="h3" />
           ))}
         </div>
       </div>

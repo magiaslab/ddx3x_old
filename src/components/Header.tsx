@@ -147,7 +147,7 @@ export function Header({ items = mainNavigation }: { items?: NavItem[] }) {
                   onMouseEnter={clearLeaveTimer}
                   onMouseLeave={scheduleCloseDesktop}
                 >
-                  <div className="rounded-xl border border-[var(--border)] bg-white p-2 shadow-[0_12px_28px_rgba(40,25,60,.12)]">
+                  <div className="rounded-xl border border-[var(--border)] bg-white p-2 shadow-[0_8px_16px_rgba(40,25,60,.08)]">
                     {item.children.map((child) => (
                       <Link
                         key={child.href}

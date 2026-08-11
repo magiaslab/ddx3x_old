@@ -78,7 +78,7 @@ export function DonationForm() {
                   setAmount(value);
                   setCustomAmount("");
                 }}
-                className={`rounded-full border px-4 py-2.5 text-sm font-semibold transition sm:px-5 ${
+                className={`rounded-xl border px-4 py-2.5 text-sm font-semibold transition sm:px-5 ${
                   selected
                     ? "border-[var(--purple-600)] bg-[var(--purple-600)] text-white"
                     : "border-[#E2D9F0] bg-white text-[#3A3247] hover:border-[#B7A3D9]"
@@ -149,7 +149,7 @@ export function DonationForm() {
           <button
             type="button"
             onClick={() => setMethod("stripe")}
-            className={`rounded-full border px-5 py-2.5 text-sm font-semibold transition ${
+            className={`rounded-xl border px-5 py-2.5 text-sm font-semibold transition ${
               method === "stripe"
                 ? "border-[var(--purple-600)] bg-[var(--purple-600)] text-white"
                 : "border-[#E2D9F0] text-[#3A3247] hover:border-[#B7A3D9]"
@@ -160,7 +160,7 @@ export function DonationForm() {
           <button
             type="button"
             onClick={() => setMethod("paypal")}
-            className={`rounded-full border px-5 py-2.5 text-sm font-semibold transition ${
+            className={`rounded-xl border px-5 py-2.5 text-sm font-semibold transition ${
               method === "paypal"
                 ? "border-[var(--purple-600)] bg-[var(--purple-600)] text-white"
                 : "border-[#E2D9F0] text-[#3A3247] hover:border-[#B7A3D9]"
@@ -171,7 +171,10 @@ export function DonationForm() {
         </div>
 
         {error ? (
-          <p className="mt-4 rounded-xl bg-[#FDECEC] px-3.5 py-2.5 text-sm text-[#9B2C2C]">
+          <p
+            role="alert"
+            className="mt-4 rounded-xl border border-[#F0C4C4] bg-[#FDECEC] px-3.5 py-2.5 text-sm text-[#9B2C2C]"
+          >
             {error}
           </p>
         ) : null}
@@ -240,7 +243,7 @@ export function DonationForm() {
         </div>
       </section>
 
-      <section className="rounded-[18px] border border-dashed border-[var(--amber-border)] bg-[var(--amber-tint)] p-6 text-sm text-[#6B5C3E] md:p-7">
+      <section className="rounded-[18px] border border-dashed border-[var(--amber-border)] bg-[var(--amber-tint)] p-6 text-sm text-[#5C4E32] md:p-7">
         <h2 className="font-serif text-lg font-semibold text-[var(--ink)]">
           Oppure via bonifico
         </h2>
@@ -258,7 +261,7 @@ export function DonationForm() {
         </p>
         <p className="mt-3">
           5×1000 — Codice fiscale:{" "}
-          <strong className="font-mono text-[#8A6A1F]">
+          <strong className="font-mono text-[#6B4F12]">
             {BANK_DETAILS.codiceFiscale}
           </strong>
         </p>

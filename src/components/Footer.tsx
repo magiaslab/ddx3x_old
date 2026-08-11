@@ -31,15 +31,13 @@ export function Footer() {
     <footer className="bg-[var(--ink)] px-4 pb-8 pt-12 text-[#D8CFEA] sm:px-6 sm:pt-16 md:px-8">
       <div className="mx-auto mb-10 grid max-w-[1240px] gap-8 sm:mb-12 sm:gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="mb-4 flex items-center gap-2.5">
-            <span className="flex h-12 w-auto shrink-0 items-center justify-center rounded-xl bg-white px-2 py-1.5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/logo.png"
-                alt=""
-                className="h-9 w-auto max-w-[180px] object-contain"
-              />
-            </span>
+          <div className="mb-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.png"
+              alt=""
+              className="h-10 w-auto max-w-[200px] rounded-lg bg-white object-contain p-1.5"
+            />
           </div>
           <p className="mb-1 font-serif text-[15px] font-semibold text-white">
             {siteConfig.name}
@@ -97,9 +95,9 @@ export function Footer() {
 
         {cols.map((col) => (
           <div key={col.title}>
-            <h4 className="mb-3.5 text-[13px] font-semibold uppercase tracking-[0.04em] text-[#9382B8] sm:mb-4.5">
+            <p className="mb-3.5 text-[13px] font-semibold uppercase tracking-[0.04em] text-[#B6A9D4] sm:mb-4.5">
               {col.title}
-            </h4>
+            </p>
             <div className="flex flex-col gap-2.5 sm:gap-3">
               {col.links.map((l) => (
                 <Link
@@ -115,9 +113,9 @@ export function Footer() {
         ))}
 
         <div>
-          <h4 className="mb-3.5 text-[13px] font-semibold uppercase tracking-[0.04em] text-[#9382B8] sm:mb-4.5">
+          <p className="mb-3.5 text-[13px] font-semibold uppercase tracking-[0.04em] text-[#B6A9D4] sm:mb-4.5">
             Social
-          </h4>
+          </p>
           <div className="flex flex-col gap-2.5 sm:gap-3">
             <a
               href={siteConfig.social.facebook}
@@ -139,7 +137,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[1240px] border-t border-[#382A54] pt-6 text-[12.5px] leading-relaxed text-[#8A7CAA] sm:text-[13px]">
+      <div className="mx-auto max-w-[1240px] border-t border-[#382A54] pt-6 text-[12.5px] leading-relaxed text-[var(--footer-muted)] sm:text-[13px]">
         © {new Date().getFullYear()} {siteConfig.name}. Tutti i diritti
         riservati.
       </div>

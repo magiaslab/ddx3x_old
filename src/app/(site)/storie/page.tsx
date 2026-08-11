@@ -27,7 +27,7 @@ export default function Page() {
             key={s.id}
             id={s.id}
             href={`/storie/${s.slug}`}
-            className="flex gap-4 rounded-[18px] border border-[var(--border)] bg-white p-5 text-[var(--ink)] no-underline transition hover:border-[#D9CBEF] hover:shadow-[0_10px_24px_rgba(80,50,120,.08)]"
+            className="flex gap-4 rounded-[18px] border border-[var(--border)] bg-white p-5 text-[var(--ink)] no-underline transition hover:border-[#D9CBEF]"
           >
             {s.image ? (
               // eslint-disable-next-line @next/next/no-img-element

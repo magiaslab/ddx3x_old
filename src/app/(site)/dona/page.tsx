@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14 md:px-8">
+    <main className="mx-auto max-w-[40rem] px-4 py-10 sm:px-6 sm:py-14 md:px-8">
       <header className="mb-7 border-b border-[var(--border)] pb-5 sm:mb-8 sm:pb-6">
         <h1 className="font-serif text-[1.65rem] font-semibold tracking-tight text-[var(--ink)] sm:text-3xl md:text-[2rem]">
           Come contribuire
         </h1>
-        <p className="mt-3 text-[var(--gray-600)]">
+        <p className="mt-3 max-w-[65ch] text-[var(--gray-600)]">
           Sostenere l&apos;Associazione DDX3X ODV significa offrire un aiuto
           concreto alle persone che convivono con la sindrome e alle loro
           famiglie. Ogni contributo finanzia ricerca, supporto, inclusione e
@@ -23,7 +23,7 @@ export default function Page() {
         </p>
       </header>
 
-      <div className="prose-ddx mb-10">
+      <div className="prose-ddx mb-10 max-w-[65ch]">
         <h2>Perché il tuo contributo è importante</h2>
         <ul>
           <li>promuovere ricerca scientifica e studi clinici</li>

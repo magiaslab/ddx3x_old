@@ -26,7 +26,7 @@ export default function Page() {
           <li key={p.id}>
             <Link
               href={`/pubblicazioni/${p.slug}`}
-              className="flex gap-4 rounded-[18px] border border-[var(--border)] bg-white p-4 text-[var(--ink)] no-underline transition hover:border-[#D9CBEF] hover:shadow-[0_8px_20px_rgba(80,50,120,.07)]"
+              className="flex gap-4 rounded-[18px] border border-[var(--border)] bg-white p-4 text-[var(--ink)] no-underline transition hover:border-[#D9CBEF]"
             >
               {p.image ? (
                 // eslint-disable-next-line @next/next/no-img-element
