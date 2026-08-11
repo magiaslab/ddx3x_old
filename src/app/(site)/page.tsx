@@ -214,7 +214,7 @@ export default async function HomePage() {
             </div>
             <Link
               href="/eventi/conferenza-internazionale"
-              className="inline-flex w-full items-center justify-center whitespace-nowrap rounded-full bg-[var(--ink)] px-6 py-3 text-[14.5px] font-semibold text-white no-underline hover:bg-[#3A2C55] sm:w-auto"
+              className="btn-pill btn-primary w-full whitespace-nowrap px-6 py-3 sm:w-auto"
             >
               Scopri di più →
             </Link>
@@ -248,7 +248,7 @@ export default async function HomePage() {
               </p>
               <Link
                 href="/novita/studio-napoli-n-acetilcisteina"
-                className="inline-flex w-full items-center justify-center rounded-full bg-[var(--green-600)] px-6 py-3 text-[14.5px] font-semibold text-white no-underline hover:bg-[var(--green-700)] sm:w-auto"
+                className="btn-pill btn-primary w-full px-6 py-3 sm:w-auto"
               >
                 Leggi lo studio →
               </Link>
@@ -264,7 +264,7 @@ export default async function HomePage() {
               </p>
               <Link
                 href="/ricerca/italia#telethon-brusco"
-                className="inline-flex w-full items-center justify-center rounded-full border border-[var(--ink)] bg-transparent px-6 py-3 text-[14.5px] font-semibold text-[var(--ink)] no-underline hover:bg-[var(--sand-50)] sm:w-auto"
+                className="btn-pill btn-primary w-full px-6 py-3 sm:w-auto"
               >
                 Scopri il progetto →
               </Link>
@@ -292,7 +292,7 @@ export default async function HomePage() {
               </p>
               <Link
                 href="/mappa-casi-registrati"
-                className="inline-flex w-full items-center justify-center rounded-full bg-[var(--green-600)] px-6 py-3 text-[14.5px] font-semibold text-white no-underline hover:bg-[var(--green-700)] sm:w-auto"
+                className="btn-pill btn-primary w-full px-6 py-3 sm:w-auto"
               >
                 Vedi la mappa completa →
               </Link>

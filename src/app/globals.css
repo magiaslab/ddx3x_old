@@ -69,12 +69,15 @@ iframe {
   max-width: 100%;
 }
 
-a {
-  color: var(--purple-600);
-}
+/* In @layer base così le utility Tailwind (es. text-white) possono sovrascrivere. */
+@layer base {
+  a {
+    color: var(--purple-600);
+  }
 
-a:hover {
-  color: var(--purple-700);
+  a:hover {
+    color: var(--purple-700);
+  }
 }
 
 .font-serif {
@@ -99,25 +102,29 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-.btn-primary {
+.btn-primary,
+a.btn-primary {
   background: var(--purple-600);
   color: #fff;
   padding: 11px 20px;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+a.btn-primary:hover {
   background: var(--purple-700);
   color: #fff;
 }
 
-.btn-outline {
+.btn-outline,
+a.btn-outline {
   background: #fff;
   color: #3a3247;
   border: 1px solid #e2d9f0;
   padding: 12px 22px;
 }
 
-.btn-outline:hover {
+.btn-outline:hover,
+a.btn-outline:hover {
   border-color: #b7a3d9;
   color: #3a3247;
 }
