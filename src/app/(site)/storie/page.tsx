@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Le nostre storie",
   description:
     "Testimonianze delle famiglie italiane che convivono con la sindrome DDX3X.",
+  alternates: { canonical: "/storie" },
 };
 
 export default function Page() {

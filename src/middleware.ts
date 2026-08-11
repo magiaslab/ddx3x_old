@@ -7,10 +7,21 @@ import {
 } from "@/lib/redirects";
 
 /**
- * Redirect 301 da URL WordPress legacy (?page_id= / ?p=) ai nuovi slug.
- * Elenco completo: docs/REDIRECTS.md
+ * - Apex ddx3x.it → www (quando la richiesta arriva all'app)
+ * - Redirect 301 da URL WordPress legacy (?page_id= / ?p=) ai nuovi slug
+ *
+ * Elenco completo page_id/p: docs/REDIRECTS.md
  */
 export function middleware(request: NextRequest) {
+  const host = request.headers.get("host")?.split(":")[0]?.toLowerCase() ?? "";
+
+  if (host === "ddx3x.it") {
+    const url = request.nextUrl.clone();
+    url.protocol = "https:";
+    url.host = "www.ddx3x.it";
+    return NextResponse.redirect(url, 301);
+  }
+
   const { searchParams } = request.nextUrl;
   const pageId = searchParams.get("page_id");
   const postId = searchParams.get("p");
@@ -31,5 +42,11 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: "/",
+  matcher: [
+    /*
+     * Apex redirect su tutte le path; page_id/p tipicamente su /.
+     * Escludi asset statici e file con estensione.
+     */
+    "/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)",
+  ],
 };

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { NewsCard } from "@/components/NewsCard";
 import { getPosts } from "@/lib/sanity";
 
@@ -7,6 +6,7 @@ export const metadata: Metadata = {
   title: "Novità",
   description:
     "Campagne, eventi e comunicati dell'Associazione DDX3X Italia ODV.",
+  alternates: { canonical: "/novita" },
 };
 
 export default async function NovitaPage() {
@@ -19,12 +19,7 @@ export default async function NovitaPage() {
           Novità
         </h1>
         <p className="mt-3 text-[var(--gray-600)]">
-          Campagne, eventi e comunicati dell&apos;Associazione. I contenuti sono
-          gestiti tramite Sanity Studio (
-          <Link href="/studio" className="font-semibold text-[var(--purple-600)] no-underline hover:text-[var(--purple-700)]">
-            /studio
-          </Link>
-          ).
+          Campagne, eventi e comunicati dell&apos;Associazione DDX3X Italia ODV.
         </p>
       </header>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

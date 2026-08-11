@@ -31,10 +31,7 @@ export async function POST(request: NextRequest) {
 
   const campaignId = body.campaignId || "generale";
   const campaignName = body.campaignName || "Donazione generale";
-  const origin =
-    request.headers.get("origin") ||
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    siteConfig.url;
+  const origin = request.headers.get("origin") || siteConfig.url;
 
   const stripe = new Stripe(secret);
 

@@ -5,6 +5,7 @@ import { PageShell } from "@/components/PageShell";
 export const metadata: Metadata = {
   title: "Donazione annullata",
   description: "La donazione è stata annullata. Puoi riprovare in qualsiasi momento.",
+  robots: { index: false, follow: false },
 };
 
 export default function Page() {

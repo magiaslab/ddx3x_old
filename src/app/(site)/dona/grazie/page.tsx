@@ -5,6 +5,7 @@ import { PageShell } from "@/components/PageShell";
 export const metadata: Metadata = {
   title: "Grazie per la donazione",
   description: "La tua donazione all'Associazione DDX3X Italia ODV è andata a buon fine.",
+  robots: { index: false, follow: false },
 };
 
 export default function Page() {

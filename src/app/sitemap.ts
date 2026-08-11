@@ -6,36 +6,39 @@ import { pubblicazioni } from "@/content/pubblicazioni";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url;
-  const staticRoutes = [
-    "",
-    "/chi-siamo",
-    "/missione-valori-vision",
-    "/mappa-casi-registrati",
-    "/statuto",
-    "/bilanci",
-    "/sindrome",
-    "/diagnosi",
-    "/trattamenti-terapie",
-    "/ricerca/italia",
-    "/ricerca/mondo",
-    "/pubblicazioni",
-    "/eventi/conferenza-internazionale",
-    "/dona",
-    "/dona/campagne",
-    "/storie",
-    "/contatti",
-    "/novita",
-    "/privacy",
+  /** lastmod statiche: data deploy (Google ignora priority/changefreq). */
+  const staticLastMod = new Date();
+
+  const staticRoutes: { path: string; priority: number }[] = [
+    { path: "", priority: 1 },
+    { path: "/novita", priority: 0.9 },
+    { path: "/storie", priority: 0.8 },
+    { path: "/chi-siamo", priority: 0.8 },
+    { path: "/sindrome", priority: 0.8 },
+    { path: "/dona", priority: 0.8 },
+    { path: "/eventi/conferenza-internazionale", priority: 0.8 },
+    { path: "/missione-valori-vision", priority: 0.7 },
+    { path: "/mappa-casi-registrati", priority: 0.7 },
+    { path: "/statuto", priority: 0.6 },
+    { path: "/bilanci", priority: 0.6 },
+    { path: "/diagnosi", priority: 0.7 },
+    { path: "/trattamenti-terapie", priority: 0.7 },
+    { path: "/ricerca/italia", priority: 0.7 },
+    { path: "/ricerca/mondo", priority: 0.7 },
+    { path: "/pubblicazioni", priority: 0.7 },
+    { path: "/dona/campagne", priority: 0.6 },
+    { path: "/contatti", priority: 0.7 },
+    { path: "/privacy", priority: 0.3 },
   ];
 
   const posts = await getPosts();
 
   return [
-    ...staticRoutes.map((path) => ({
+    ...staticRoutes.map(({ path, priority }) => ({
       url: `${base}${path}`,
-      lastModified: new Date(),
+      lastModified: staticLastMod,
       changeFrequency: "weekly" as const,
-      priority: path === "" ? 1 : 0.7,
+      priority,
     })),
     ...posts.map((post) => ({
       url: `${base}/novita/${post.slug}`,
