@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Lora, Work_Sans } from "next/font/google";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -17,6 +18,8 @@ const lora = Lora({
   display: "swap",
 });
 
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -31,6 +34,9 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
+  verification: googleVerification
+    ? { google: googleVerification }
+    : undefined,
   openGraph: {
     type: "website",
     locale: "it_IT",
@@ -50,7 +56,10 @@ export default function RootLayout({
       lang="it"
       className={`${workSans.variable} ${lora.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        {children}
+        <GoogleAnalytics />
+      </body>
     </html>
   );
 }
