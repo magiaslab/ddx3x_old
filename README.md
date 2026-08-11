@@ -72,6 +72,7 @@ Implementati in `src/middleware.ts` con la mappa in `src/lib/redirects.ts` (elen
 | `/?page_id=1539` | `/ricerca/mondo` |
 | `/?page_id=676` | `/pubblicazioni` |
 | `/?page_id=1162` | `/eventi/conferenza-internazionale` |
+| `/?page_id=1890` | `/eventi/international-conference` |
 | `/?page_id=1547` | `/dona` |
 | `/?page_id=1549` | `/dona/campagne` |
 | `/?page_id=230` | `/dona` |

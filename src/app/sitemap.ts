@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/sindrome", priority: 0.8 },
     { path: "/dona", priority: 0.8 },
     { path: "/eventi/conferenza-internazionale", priority: 0.8 },
+    { path: "/eventi/international-conference", priority: 0.8 },
     { path: "/missione-valori-vision", priority: 0.7 },
     { path: "/mappa-casi-registrati", priority: 0.7 },
     { path: "/statuto", priority: 0.6 },

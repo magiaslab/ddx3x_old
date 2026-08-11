@@ -12,7 +12,7 @@ export const PAGE_ID_REDIRECTS: Record<string, string> = {
   "1539": "/ricerca/mondo",
   "676": "/pubblicazioni",
   "1162": "/eventi/conferenza-internazionale",
-  "1890": "/eventi/conferenza-internazionale",
+  "1890": "/eventi/international-conference",
   "2210": "/novita/studio-napoli-n-acetilcisteina",
   "1547": "/dona",
   "1549": "/dona/campagne",
