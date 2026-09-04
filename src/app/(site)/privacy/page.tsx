@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/PageShell";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, withCanonical } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withCanonical("/privacy", {
   title: "Privacy",
   description: "Informativa privacy dell'Associazione DDX3X Italia ODV.",
-};
+});
 
 export default function Page() {
   return (

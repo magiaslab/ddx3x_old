@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { pubblicazioni } from "@/content/pubblicazioni";
 import { rewriteWpHtml } from "@/lib/rewrite-wp-html";
 import { formatDateIt } from "@/components/NewsCard";
+import { withCanonical } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -15,7 +16,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const pub = pubblicazioni.find((p) => p.slug === slug);
   if (!pub) return { title: "Pubblicazione" };
-  return { title: pub.title };
+  return withCanonical(`/pubblicazioni/${pub.slug}`, {
+    title: pub.title,
+  });
 }
 
 export default async function PubPage({ params }: Props) {

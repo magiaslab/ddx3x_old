@@ -29,6 +29,12 @@ const nextConfig: NextConfig = {
         destination: "https://www.ddx3x.it/:path*",
         permanent: true,
       },
+      // WP uploads → media migrati (es. GeneReviews PDF ancora in GSC)
+      {
+        source: "/wp-content/uploads/:path*",
+        destination: "/media/wp/:path*",
+        permanent: true,
+      },
     ];
   },
 };

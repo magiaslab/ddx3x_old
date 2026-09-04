@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CmsPageView } from "@/components/CmsPageView";
 import { getPageBySlug } from "@/lib/sanity";
+import { withCanonical } from "@/lib/site";
 
 /** Sempre fresco da Sanity. */
 export const dynamic = "force-dynamic";
@@ -36,10 +37,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!slug?.length) return {};
   const path = slug.join("/");
   const page = await getPageBySlug(path);
-  return {
+  return withCanonical(`/${path}`, {
     title: page?.title,
     description: page?.seoDescription,
-  };
+  });
 }
 
 export default async function CmsCatchAllPage({ params }: Props) {

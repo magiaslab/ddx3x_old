@@ -4,10 +4,13 @@ export function PageShell({
   title,
   description,
   children,
+  after,
 }: {
   title: string;
   description?: string;
   children: ReactNode;
+  /** Contenuto fuori dal blocco tipografico (es. form). */
+  after?: ReactNode;
 }) {
   return (
     <main className="mx-auto max-w-[40rem] px-4 py-10 sm:px-6 sm:py-14 md:px-8">
@@ -22,6 +25,7 @@ export function PageShell({
         ) : null}
       </header>
       <div className="prose-ddx max-w-[65ch]">{children}</div>
+      {after}
     </main>
   );
 }

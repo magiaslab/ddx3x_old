@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 const CANONICAL_ORIGIN = "https://www.ddx3x.it";
 
 /**
@@ -42,6 +44,37 @@ export function absoluteUrl(path = "/"): string {
   const normalized = path.startsWith("/") ? path : `/${path}`;
   if (normalized === "/") return siteConfig.url;
   return `${siteConfig.url}${normalized}`;
+}
+
+/**
+ * Metadata di pagina con canonical self-referenziante.
+ * Non impostare canonical nel root layout: verrebbe ereditato su tutte le route.
+ */
+export function withCanonical(
+  path: string,
+  meta: {
+    title?: string | Metadata["title"];
+    description?: string | null;
+    openGraph?: Metadata["openGraph"];
+    [key: string]: unknown;
+  } = {},
+): Metadata {
+  const canonical =
+    !path || path === "/"
+      ? "/"
+      : path.startsWith("/")
+        ? path
+        : `/${path}`;
+  const { description, openGraph, ...rest } = meta;
+  return {
+    ...rest,
+    ...(description ? { description } : {}),
+    alternates: { canonical },
+    openGraph: {
+      ...(typeof openGraph === "object" && openGraph ? openGraph : {}),
+      url: absoluteUrl(canonical),
+    },
+  };
 }
 
 /** Organization + WebSite per la root (e pagine che non hanno schema proprio). */

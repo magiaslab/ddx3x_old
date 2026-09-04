@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CmsPageView } from "@/components/CmsPageView";
+import { ContactForm } from "@/components/ContactForm";
 import { getPageBySlug } from "@/lib/sanity";
+import { withCanonical } from "@/lib/site";
 
 const SLUG = "contatti";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageBySlug(SLUG);
-  return {
+  return withCanonical(`/${SLUG}`, {
     title: page?.title || SLUG,
     description: page?.seoDescription,
-  };
+  });
 }
 
 export default async function Page() {
   const page = await getPageBySlug(SLUG);
   if (!page) notFound();
-  return <CmsPageView page={page} />;
+  return <CmsPageView page={page} after={<ContactForm />} />;
 }

@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { withCanonical } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Pagina non trovata",
+  ...withCanonical("/pagina-non-trovata", {
+    title: "Pagina non trovata",
+  }),
   robots: { index: false, follow: false },
 };
 

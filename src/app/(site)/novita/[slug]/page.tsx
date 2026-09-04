@@ -4,7 +4,7 @@ import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { CategoryBadge, formatDateIt } from "@/components/NewsCard";
 import { JsonLd } from "@/components/JsonLd";
 import { getPostBySlug, urlForImage } from "@/lib/sanity";
-import { absoluteUrl, siteConfig } from "@/lib/site";
+import { absoluteUrl, siteConfig, withCanonical } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -28,15 +28,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return { title: "Novità" };
   const cover = postCoverUrl(post);
   const path = `/novita/${post.slug}`;
-  return {
+  return withCanonical(path, {
     title: post.title,
     description: post.excerpt,
-    alternates: { canonical: path },
     openGraph: {
       type: "article",
       title: post.title,
       description: post.excerpt,
-      url: path,
       publishedTime: post.publishedAt,
       images: cover
         ? [{ url: cover, alt: post.coverImage?.alt || post.title }]
@@ -48,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.excerpt,
       images: cover ? [cover] : undefined,
     },
-  };
+  });
 }
 
 const portableComponents: PortableTextComponents = {

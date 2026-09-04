@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { pubblicazioni } from "@/content/pubblicazioni";
 import { formatDateIt } from "@/components/NewsCard";
+import { withCanonical } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withCanonical("/pubblicazioni", {
   title: "Pubblicazioni online",
   description:
     "Articoli e pubblicazioni scientifiche sulla sindrome DDX3X commentati dall'Associazione.",
-};
+});
 
 export default function Page() {
   return (

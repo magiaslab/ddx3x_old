@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/PageShell";
+import { withCanonical } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Grazie per la donazione",
-  description: "La tua donazione all'Associazione DDX3X Italia ODV è andata a buon fine.",
+  ...withCanonical("/dona/grazie", {
+    title: "Grazie per la donazione",
+    description:
+      "La tua donazione all'Associazione DDX3X Italia ODV è andata a buon fine.",
+  }),
   robots: { index: false, follow: false },
 };
 

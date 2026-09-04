@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DonationForm } from "@/components/DonationForm";
+import { withCanonical } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withCanonical("/dona", {
   title: "Come contribuire — Dona",
   description:
     "Sostieni l'Associazione DDX3X Italia ODV con una donazione via Stripe, PayPal o bonifico.",
-};
+});
 
 export default function Page() {
   return (

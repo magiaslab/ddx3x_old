@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { stories } from "@/content/stories";
 import { rewriteWpHtml } from "@/lib/rewrite-wp-html";
+import { withCanonical } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -14,10 +15,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const story = stories.find((s) => s.slug === slug);
   if (!story) return { title: "Storia" };
-  return {
+  return withCanonical(`/storie/${story.slug}`, {
     title: story.name,
     description: story.excerpt,
-  };
+  });
 }
 
 export default async function StoryPage({ params }: Props) {
