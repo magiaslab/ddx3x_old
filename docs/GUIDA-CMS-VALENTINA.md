@@ -16,6 +16,14 @@ Questa guida spiega solo cosa serve per le **Novità** (post). Non serve sapere 
 
 **Nota:** non usare più indirizzi `*.vercel.app`. L’indirizzo ufficiale è sempre `www.ddx3x.it/studio`.
 
+### Lingua dell’interfaccia
+
+Puoi scegliere **Italiano** o **English** per i menu e i pulsanti di Studio (non riguarda i testi delle novità, che restano come li scrivi tu):
+
+1. In basso a sinistra clicca sul tuo nome / avatar.
+2. Apri la voce sulla lingua (Display language / Lingua).
+3. Seleziona **Italiano**.
+
 Se non riesci ad accedere (“CORS” / login che non apre): chiedi ad Andrea di verificare in Sanity Manage → API → CORS che sia presente `https://www.ddx3x.it`.
 
 ---
