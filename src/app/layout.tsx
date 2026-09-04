@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Lora, Work_Sans } from "next/font/google";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { JsonLd } from "@/components/JsonLd";
-import { organizationWebsiteJsonLd, siteConfig } from "@/lib/site";
+import {
+  organizationWebsiteJsonLd,
+  siteConfig,
+} from "@/lib/site";
 import "./globals.css";
 
 const workSans = Work_Sans({

@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { CategoryBadge, formatDateIt } from "@/components/NewsCard";
 import { JsonLd } from "@/components/JsonLd";
-import type { Post } from "@/content/seed-posts";
 import { getPostBySlug, getPosts, urlForImage } from "@/lib/sanity";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
@@ -14,7 +13,10 @@ export async function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
 }
 
-function postCoverUrl(post: Post): string | null {
+function postCoverUrl(post: {
+  coverImageUrl?: string | null;
+  coverImage?: Parameters<typeof urlForImage>[0];
+}): string | null {
   if (post.coverImageUrl) return post.coverImageUrl;
   if (post.coverImage) {
     return urlForImage(post.coverImage)?.width(1200).height(630).url() ?? null;

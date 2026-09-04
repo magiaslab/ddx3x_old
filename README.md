@@ -36,13 +36,24 @@ Su Vercel: Project → Settings → Environment Variables (Production + Preview)
 
 ## Sanity Studio (volontari non tecnici)
 
-1. Crea un progetto Sanity (piano gratuito) e copia Project ID / dataset in `.env.local` e su Vercel.
-2. Avvia il sito e apri `/studio` (oppure collega un hostname Sanity dedicato).
-3. Accedi con l'account Sanity autorizzato sul progetto.
-4. Crea un documento **Novità** (`post`): titolo, slug, estratto, corpo, immagine, categoria (`campagna` \| `evento` \| `comunicato`), data.
-5. Pubblica: il sito legge i post via CDN Sanity **senza nuovo deploy**.
+**URL ufficiale Studio:** [https://www.ddx3x.it/studio](https://www.ddx3x.it/studio)  
+Guida passo passo per Valentina: [`docs/GUIDA-CMS-VALENTINA.md`](docs/GUIDA-CMS-VALENTINA.md)
 
-Per importare i 4 post seed in Sanity, ricreali dallo Studio partendo da `src/content/seed-posts.ts` (o usa lo script di migrazione in una fase successiva).
+1. Piano **Free** di Sanity: dopo il trial Growth il progetto resta gratis (nessun addebito se non fate upgrade).
+2. Accedi a `/studio` sul dominio **www.ddx3x.it** (non usare più `*.vercel.app`).
+3. Crea/modifica documenti **Novità** (`post`): titolo, slug, estratto, corpo, immagine, categoria (`campagna` \| `evento` \| `comunicato`), data.
+4. **Pubblica**: il sito legge i post via CDN Sanity, di solito senza nuovo deploy.
+
+### CORS (admin)
+
+In [sanity.io/manage](https://www.sanity.io/manage) → progetto **ddx3x** → API → CORS origins, assicurati di avere:
+
+- `https://www.ddx3x.it` (Allow credentials)
+- `http://localhost:3000` (solo sviluppo)
+
+Senza `www.ddx3x.it` il login dello Studio sul dominio reale può fallire.
+
+Per importare i post seed in Sanity: `npm run import:sanity` (richiede `SANITY_API_WRITE_TOKEN`).
 
 ## Donazioni
 
