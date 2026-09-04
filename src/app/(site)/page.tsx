@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { FeaturedNewsSection } from "@/components/FeaturedNews";
 import { LatestNews } from "@/components/NewsCard";
@@ -6,8 +7,11 @@ import { getFeaturedPosts, getLatestPosts } from "@/lib/sanity";
 import { BANK_DETAILS } from "@/lib/campaigns";
 import { siteConfig } from "@/lib/site";
 
-/** Sempre fresco da Sanity (Publish / Delete senza attendere deploy). */
-export const dynamic = "force-dynamic";
+/**
+ * ISR 60s: bilancia freschezza Sanity e TTFB.
+ * (Le route /novita restano force-dynamic.)
+ */
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: {
@@ -38,9 +42,8 @@ function formatItNumber(n: number) {
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-const HERO_BG =
-  "/media/wp/2025/09/Insieme-per-capire-sostenere-e-dare-voce-alla-Sindrome-DDX3X.png";
-const MAP_IMG = "/media/wp/2025/09/Mappa-dei-casi-1.png";
+const HERO_BG = "/media/wp/2025/09/hero-home.webp";
+const MAP_IMG = "/media/wp/2025/09/mappa-casi.webp";
 
 export default async function HomePage() {
   const featuredAll = await getFeaturedPosts();
@@ -56,14 +59,14 @@ export default async function HomePage() {
   return (
     <>
       <section className="relative overflow-hidden px-4 pb-14 pt-12 sm:px-6 sm:pb-20 sm:pt-16 md:px-8 md:pb-24 md:pt-20">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={HERO_BG}
           alt=""
           aria-hidden
-          fetchPriority="high"
-          decoding="async"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[70%_center] sm:object-center"
+          fill
+          priority
+          sizes="100vw"
+          className="pointer-events-none object-cover object-[70%_center] sm:object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(251,249,245,.62)] via-[rgba(251,249,245,.38)] to-[var(--sand-50)] sm:bg-gradient-to-r sm:from-[rgba(251,249,245,.78)] sm:via-[rgba(251,249,245,.42)] sm:to-[rgba(251,249,245,.08)]" />
         <div className="absolute inset-0 hidden bg-gradient-to-t from-[var(--sand-50)] via-transparent to-transparent sm:block" />
@@ -306,12 +309,16 @@ export default async function HomePage() {
                 Vedi la mappa completa →
               </Link>
             </div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={MAP_IMG}
-              alt="Mappa dei casi registrati di sindrome DDX3X in Italia"
-              className="mx-auto w-full max-w-[420px] rounded-2xl"
-            />
+            <div className="relative mx-auto aspect-[4/3] w-full max-w-[420px] overflow-hidden rounded-2xl">
+              <Image
+                src={MAP_IMG}
+                alt="Mappa dei casi registrati di sindrome DDX3X in Italia"
+                fill
+                sizes="(max-width: 768px) 100vw, 420px"
+                className="object-contain"
+                loading="lazy"
+              />
+            </div>
           </div>
         </section>
       ) : null}
@@ -337,10 +344,14 @@ function QuickCard({
       href={href}
       className="flex flex-col gap-3.5 rounded-[18px] border border-[var(--border)] bg-white p-5 text-[var(--ink)] no-underline transition hover:-translate-y-0.5 hover:border-[#D9CBEF] sm:gap-4 sm:rounded-[20px] sm:p-8"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
+      {/* eslint-disable-next-line @next/next/no-img-element — icone piccole già leggere */}
       <img
         src={image}
         alt=""
+        width={72}
+        height={72}
+        loading="lazy"
+        decoding="async"
         className="h-14 w-14 rounded-[12px] object-contain sm:h-[72px] sm:w-[72px] sm:rounded-[14px]"
       />
       <div>

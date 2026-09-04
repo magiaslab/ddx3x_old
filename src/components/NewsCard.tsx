@@ -1,9 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   normalizeCategory,
   type Post,
   type PostCategory,
 } from "@/content/seed-posts";
+import { optimizeCoverUrl } from "@/lib/images";
 
 const MONTHS_IT = [
   "gennaio",
@@ -42,10 +44,12 @@ export function CategoryBadge({
   );
 }
 
-export function postCoverUrl(post: Post) {
-  if (post.coverImageUrl) return post.coverImageUrl;
-  if (post.coverImage?.asset?.url) return post.coverImage.asset.url;
-  return null;
+export function postCoverUrl(post: Post, width = 800) {
+  const raw =
+    post.coverImageUrl ||
+    post.coverImage?.asset?.url ||
+    null;
+  return optimizeCoverUrl(raw, width);
 }
 
 export function NewsCard({
@@ -55,7 +59,7 @@ export function NewsCard({
   post: Post;
   headingLevel?: "h2" | "h3";
 }) {
-  const img = postCoverUrl(post);
+  const img = postCoverUrl(post, 640);
   const Title = headingLevel;
   return (
     <Link
@@ -63,12 +67,16 @@ export function NewsCard({
       className="flex flex-col overflow-hidden rounded-[18px] border border-[var(--border)] bg-white text-[var(--ink)] no-underline transition hover:border-[#D9CBEF]"
     >
       {img ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={img}
-          alt={post.coverImage?.alt || post.title}
-          className="aspect-video w-full object-cover"
-        />
+        <div className="relative aspect-video w-full bg-[var(--purple-50)]">
+          <Image
+            src={img}
+            alt={post.coverImage?.alt || post.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover"
+            loading="lazy"
+          />
+        </div>
       ) : (
         <div className="flex aspect-video w-full items-center justify-center bg-[var(--purple-50)] text-sm font-medium text-[var(--purple-700)]">
           Novità

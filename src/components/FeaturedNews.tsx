@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   CategoryBadge,
   formatDateIt,
@@ -14,7 +15,7 @@ export function FeaturedNewsCard({
   post: Post;
   headingLevel?: "h2" | "h3";
 }) {
-  const img = postCoverUrl(post);
+  const img = postCoverUrl(post, 1200);
   const Title = headingLevel;
 
   return (
@@ -24,11 +25,13 @@ export function FeaturedNewsCard({
     >
       <div className="relative min-h-[200px] bg-[var(--purple-50)] sm:min-h-[260px]">
         {img ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={img}
             alt={post.coverImage?.alt || post.title}
-            className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+            fill
+            sizes="(max-width: 640px) 100vw, 50vw"
+            className="object-cover transition duration-500 group-hover:scale-[1.02]"
+            loading="lazy"
           />
         ) : (
           <div className="flex h-full min-h-[200px] items-center justify-center text-sm font-medium text-[var(--purple-700)] sm:min-h-[260px]">

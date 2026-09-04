@@ -15,6 +15,20 @@ export function rewriteWpHtml(html: string): string {
       "/media/wp/",
     )
     .replace(/\/wp-content\/uploads\//gi, "/media/wp/")
+    // Varianti WebP già generate per asset molto pesanti
+    .replace(
+      /\/media\/wp\/2026\/02\/uova-di-pasqua-2026\.png/gi,
+      "/media/wp/2026/02/uova-di-pasqua-2026.webp",
+    )
+    .replace(
+      /\/media\/wp\/2026\/01\/DDX3X-Conference-5-6-May-2026-1-1\.png/gi,
+      "/media/wp/2026/01/DDX3X-Conference-5-6-May-2026-1-1.webp",
+    )
+    .replace(
+      /\/media\/wp\/2025\/11\/Sostieni-lAssociazione-DDX3X-1-2\.png/gi,
+      "/media/wp/2025/11/Sostieni-lAssociazione-DDX3X-1-2.webp",
+    )
+    .replace(/<img(?![^>]*\bloading=)/gi, '<img loading="lazy" decoding="async"')
     .replace(
       /https?:\/\/(?:www\.)?ddx3x\.it\/\?(page_id|p)=(\d+)/gi,
       (_m, kind: string, id: string) => resolveLegacyId(kind, id),
