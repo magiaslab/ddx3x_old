@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { FeaturedNewsSection } from "@/components/FeaturedNews";
 import { NovitaListing } from "@/components/NovitaListing";
-import { getPosts, SANITY_REVALIDATE_SECONDS } from "@/lib/sanity";
+import { getPosts } from "@/lib/sanity";
 
 /** Aggiorna l’elenco dopo Publish su Sanity, senza nuovo deploy. */
-export const revalidate = SANITY_REVALIDATE_SECONDS;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Novità",

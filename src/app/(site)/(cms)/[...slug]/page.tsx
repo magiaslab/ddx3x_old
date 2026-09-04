@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CmsPageView } from "@/components/CmsPageView";
-import { getPageBySlug, getPages, SANITY_REVALIDATE_SECONDS } from "@/lib/sanity";
+import { getPageBySlug, getPages } from "@/lib/sanity";
 
 /** Pagine CMS: aggiornamento dopo Publish senza nuovo deploy. */
-export const revalidate = SANITY_REVALIDATE_SECONDS;
+export const revalidate = 60;
 
 /** Route già gestite da cartelle dedicate — non devono passare dal catch-all. */
 const RESERVED = new Set([

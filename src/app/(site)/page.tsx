@@ -2,16 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FeaturedNewsSection } from "@/components/FeaturedNews";
 import { LatestNews } from "@/components/NewsCard";
-import {
-  getFeaturedPosts,
-  getLatestPosts,
-  SANITY_REVALIDATE_SECONDS,
-} from "@/lib/sanity";
+import { getFeaturedPosts, getLatestPosts } from "@/lib/sanity";
 import { BANK_DETAILS } from "@/lib/campaigns";
 import { siteConfig } from "@/lib/site";
 
 /** Home: le ultime novità da Sanity si aggiornano senza nuovo deploy. */
-export const revalidate = SANITY_REVALIDATE_SECONDS;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: {
