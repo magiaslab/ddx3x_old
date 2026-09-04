@@ -1,14 +1,21 @@
-import { existsSync } from "fs";
-import path from "path";
+/** Path locali per cui abbiamo già generato un .webp in public/. */
+const LOCAL_WEBP: Record<string, string> = {
+  "/media/wp/2025/09/Insieme-per-capire-sostenere-e-dare-voce-alla-Sindrome-DDX3X.png":
+    "/media/wp/2025/09/hero-home.webp",
+  "/media/wp/2025/09/Mappa-dei-casi-1.png":
+    "/media/wp/2025/09/mappa-casi.webp",
+  "/media/wp/2026/02/uova-di-pasqua-2026.png":
+    "/media/wp/2026/02/uova-di-pasqua-2026.webp",
+  "/media/wp/2026/01/DDX3X-Conference-5-6-May-2026-1-1.png":
+    "/media/wp/2026/01/DDX3X-Conference-5-6-May-2026-1-1.webp",
+  "/media/wp/2025/11/Sostieni-lAssociazione-DDX3X-1-2.png":
+    "/media/wp/2025/11/Sostieni-lAssociazione-DDX3X-1-2.webp",
+};
 
-/** Se esiste il .webp corrispondente in public/, usalo (immagini WP ottimizzate). */
+/** Usa la variante WebP se presente nella mappa (niente `fs`: safe anche in client). */
 export function preferLocalWebp(url: string): string {
   if (!url.startsWith("/media/")) return url;
-  if (/\.webp$/i.test(url)) return url;
-  if (!/\.(png|jpe?g)$/i.test(url)) return url;
-  const webp = url.replace(/\.(png|jpe?g)$/i, ".webp");
-  const abs = path.join(process.cwd(), "public", webp.replace(/^\//, ""));
-  return existsSync(abs) ? webp : url;
+  return LOCAL_WEBP[url] ?? url;
 }
 
 /** Riduce peso immagini Sanity CDN (width + webp). */
