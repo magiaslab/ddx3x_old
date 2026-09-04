@@ -37,16 +37,19 @@ export const post = defineType({
     defineField({
       name: "category",
       title: "Categoria",
-      type: "string",
-      options: {
-        list: [
-          { title: "Campagna", value: "campagna" },
-          { title: "Evento", value: "evento" },
-          { title: "Comunicato", value: "comunicato" },
-        ],
-        layout: "radio",
-      },
+      type: "reference",
+      to: [{ type: "category" }],
+      description:
+        "Scegli una categoria esistente. Per crearne di nuove: menu Categoria novità.",
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "featured",
+      title: "In evidenza",
+      type: "boolean",
+      description:
+        "Se attivo, la novità compare nella sezione “In evidenza” in home e in cima a Novità (card dedicata). Se nessuna novità è in evidenza, la sezione non compare.",
+      initialValue: false,
     }),
     defineField({
       name: "publishedAt",
@@ -66,14 +69,18 @@ export const post = defineType({
     select: {
       title: "title",
       media: "coverImage",
-      category: "category",
+      categoryTitle: "category.title",
+      featured: "featured",
       date: "publishedAt",
     },
-    prepare({ title, media, category, date }) {
+    prepare({ title, media, categoryTitle, featured, date }) {
+      const star = featured ? "★ " : "";
       return {
-        title,
+        title: `${star}${title || "Senza titolo"}`,
         media,
-        subtitle: `${category || ""} · ${date ? new Date(date).toLocaleDateString("it-IT") : ""}`,
+        subtitle: `${categoryTitle || "Senza categoria"} · ${
+          date ? new Date(date).toLocaleDateString("it-IT") : ""
+        }`,
       };
     },
   },

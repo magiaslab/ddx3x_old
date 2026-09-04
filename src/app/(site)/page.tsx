@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FeaturedNewsSection } from "@/components/FeaturedNews";
 import { LatestNews } from "@/components/NewsCard";
-import { getLatestPosts } from "@/lib/sanity";
+import {
+  getFeaturedPosts,
+  getLatestPosts,
+  SANITY_REVALIDATE_SECONDS,
+} from "@/lib/sanity";
 import { BANK_DETAILS } from "@/lib/campaigns";
 import { siteConfig } from "@/lib/site";
+
+/** Home: le ultime novità da Sanity si aggiornano senza nuovo deploy. */
+export const revalidate = SANITY_REVALIDATE_SECONDS;
 
 export const metadata: Metadata = {
   title: {
@@ -39,7 +47,11 @@ const HERO_BG =
 const MAP_IMG = "/media/wp/2025/09/Mappa-dei-casi-1.png";
 
 export default async function HomePage() {
-  const posts = await getLatestPosts(4);
+  const featuredAll = await getFeaturedPosts();
+  const featured = featuredAll.slice(0, 3);
+  const posts = await getLatestPosts(4, {
+    excludeIds: featuredAll.map((p) => p._id),
+  });
   const progress = Math.min(
     100,
     Math.round((FUNDRAISING.raised / FUNDRAISING.goal) * 100),
@@ -273,6 +285,7 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <FeaturedNewsSection posts={featured} variant="home" />
       <LatestNews posts={posts} />
 
       {SHOW_MAP ? (

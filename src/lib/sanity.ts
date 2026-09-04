@@ -1,7 +1,12 @@
 import { createClient, type QueryParams } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url";
-import { seedPosts, type Post, type PortableTextBlock } from "@/content/seed-posts";
+import {
+  seedPosts,
+  normalizeCategory,
+  type Post,
+  type PortableTextBlock,
+} from "@/content/seed-posts";
 import { seedPages } from "@/content/seed-pages";
 import {
   sanitizeExcerpt,
@@ -27,6 +32,10 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2025-01-01";
 
+/** Cache ISR: senza questo le pagine restano “congelate” al deploy. */
+export const SANITY_REVALIDATE_SECONDS = 60;
+export const SANITY_CACHE_TAG = "sanity";
+
 export const isSanityConfigured = Boolean(
   projectId && projectId !== "placeholder",
 );
@@ -36,7 +45,7 @@ export const sanityClient = isSanityConfigured
       projectId: projectId!,
       dataset,
       apiVersion,
-      // false: token + build SSG devono leggere il documento aggiornato (no CDN stale)
+      // API diretta: dati freschi a ogni revalidate (no CDN Sanity stale)
       useCdn: false,
       token: process.env.SANITY_API_READ_TOKEN,
     })
@@ -56,23 +65,38 @@ async function sanityFetch<T>(
 ): Promise<T | null> {
   if (!sanityClient) return null;
   try {
-    return await sanityClient.fetch<T>(query, params);
+    return await sanityClient.fetch<T>(query, params, {
+      next: {
+        revalidate: SANITY_REVALIDATE_SECONDS,
+        tags: [SANITY_CACHE_TAG],
+      },
+    });
   } catch {
     return null;
   }
 }
 
-const postsQuery = `*[_type == "post"] | order(publishedAt desc) {
+const postProjection = `{
   _id, title, "slug": slug.current, excerpt, body,
   coverImage{ alt, asset->{ url } },
-  category, publishedAt
+  "category": select(
+    defined(category->_id) => {
+      "title": category->title,
+      "slug": category->slug.current,
+      "color": category->color,
+      "background": category->background
+    },
+    category
+  ),
+  featured,
+  publishedAt
 }`;
 
-const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0] {
-  _id, title, "slug": slug.current, excerpt, body,
-  coverImage{ alt, asset->{ url } },
-  category, publishedAt
-}`;
+const postsQuery = `*[_type == "post"] | order(publishedAt desc) ${postProjection}`;
+
+const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0] ${postProjection}`;
+
+const featuredPostsQuery = `*[_type == "post" && featured == true] | order(publishedAt desc) ${postProjection}`;
 
 /** Integra cover locali dal seed e pulisce testo contaminato dall'export WP. */
 function enrichPost(post: Post): Post {
@@ -93,6 +117,8 @@ function enrichPost(post: Post): Post {
     coverImageUrl,
     excerpt,
     body,
+    featured: Boolean(post.featured ?? seed?.featured),
+    category: normalizeCategory(post.category ?? seed?.category),
   };
 }
 
@@ -126,8 +152,22 @@ export async function getPosts(): Promise<Post[]> {
   return seedPosts.map(enrichPost);
 }
 
-export async function getLatestPosts(limit = 4): Promise<Post[]> {
-  return (await getPosts()).slice(0, limit);
+export async function getFeaturedPosts(): Promise<Post[]> {
+  const fromSanity = await sanityFetch<Post[]>(featuredPostsQuery);
+  if (fromSanity) {
+    return fromSanity.map(enrichPost);
+  }
+  return (await getPosts()).filter((p) => p.featured);
+}
+
+export async function getLatestPosts(
+  limit = 4,
+  options?: { excludeIds?: string[] },
+): Promise<Post[]> {
+  const exclude = new Set(options?.excludeIds ?? []);
+  return (await getPosts())
+    .filter((p) => !exclude.has(p._id))
+    .slice(0, limit);
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {

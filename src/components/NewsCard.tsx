@@ -1,5 +1,9 @@
 import Link from "next/link";
-import type { Post, PostCategory } from "@/content/seed-posts";
+import {
+  normalizeCategory,
+  type Post,
+  type PostCategory,
+} from "@/content/seed-posts";
 
 const MONTHS_IT = [
   "gennaio",
@@ -22,28 +26,23 @@ export function formatDateIt(iso: string) {
   return `${d.getUTCDate()} ${MONTHS_IT[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
 }
 
-const categoryStyles: Record<
-  PostCategory,
-  { label: string; color: string; bg: string }
-> = {
-  campagna: { label: "Campagna", color: "#6B4F12", bg: "#FBF0D8" },
-  evento: { label: "Evento", color: "#54407F", bg: "#EDE7F6" },
-  comunicato: { label: "Comunicato", color: "#2F6A28", bg: "#E3F2DE" },
-};
-
-export function CategoryBadge({ category }: { category: PostCategory }) {
-  const s = categoryStyles[category];
+export function CategoryBadge({
+  category,
+}: {
+  category: Post["category"] | PostCategory;
+}) {
+  const s = normalizeCategory(category);
   return (
     <span
       className="inline-block self-start rounded-full px-2.5 py-1 text-[11.5px] font-semibold uppercase tracking-[0.04em]"
-      style={{ color: s.color, background: s.bg }}
+      style={{ color: s.color, background: s.background }}
     >
-      {s.label}
+      {s.title}
     </span>
   );
 }
 
-function coverUrl(post: Post) {
+export function postCoverUrl(post: Post) {
   if (post.coverImageUrl) return post.coverImageUrl;
   if (post.coverImage?.asset?.url) return post.coverImage.asset.url;
   return null;
@@ -56,7 +55,7 @@ export function NewsCard({
   post: Post;
   headingLevel?: "h2" | "h3";
 }) {
-  const img = coverUrl(post);
+  const img = postCoverUrl(post);
   const Title = headingLevel;
   return (
     <Link

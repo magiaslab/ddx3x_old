@@ -1,4 +1,12 @@
-export type PostCategory = "campagna" | "evento" | "comunicato";
+/** Valori legacy usati nel seed e nei post pre-migrazione. */
+export type PostCategorySlug = "campagna" | "evento" | "comunicato";
+
+export type PostCategory = {
+  title: string;
+  slug: string;
+  color?: string;
+  background?: string;
+};
 
 export type PortableTextBlock = {
   _type: string;
@@ -20,9 +28,50 @@ export type Post = {
     asset?: { _ref?: string; url?: string };
     alt?: string;
   };
-  category: PostCategory;
+  /** Oggetto da Sanity, oppure slug stringa nel seed legacy. */
+  category: PostCategory | PostCategorySlug;
+  /** In evidenza: sezione dedicata in home e in /novita. */
+  featured?: boolean;
   publishedAt: string;
 };
+
+export const DEFAULT_CATEGORY_STYLES: Record<
+  string,
+  { title: string; color: string; background: string }
+> = {
+  campagna: { title: "Campagna", color: "#6B4F12", background: "#FBF0D8" },
+  evento: { title: "Evento", color: "#54407F", background: "#EDE7F6" },
+  comunicato: { title: "Comunicato", color: "#2F6A28", background: "#E3F2DE" },
+};
+
+export function normalizeCategory(
+  category: Post["category"] | null | undefined,
+): PostCategory {
+  if (!category) {
+    return {
+      title: "Novità",
+      slug: "novita",
+      color: "#54407F",
+      background: "#EDE7F6",
+    };
+  }
+  if (typeof category === "string") {
+    const known = DEFAULT_CATEGORY_STYLES[category];
+    return {
+      title: known?.title ?? category,
+      slug: category,
+      color: known?.color,
+      background: known?.background,
+    };
+  }
+  const known = DEFAULT_CATEGORY_STYLES[category.slug];
+  return {
+    title: category.title || known?.title || category.slug,
+    slug: category.slug,
+    color: category.color || known?.color || "#54407F",
+    background: category.background || known?.background || "#EDE7F6",
+  };
+}
 
 /** Contenuti iniziali migrati dal blog WordPress (usati se Sanity non è configurato). */
 export const seedPosts: Post[] = [

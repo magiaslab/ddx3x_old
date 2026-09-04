@@ -42,7 +42,8 @@ Guida passo passo per Valentina: [`docs/GUIDA-CMS-VALENTINA.md`](docs/GUIDA-CMS-
 1. Piano **Free** di Sanity: dopo il trial Growth il progetto resta gratis (nessun addebito se non fate upgrade).
 2. Accedi a `/studio` sul dominio **www.ddx3x.it** (non usare più `*.vercel.app`).
 3. Crea/modifica documenti **Novità** (`post`): titolo, slug, estratto, corpo, immagine, categoria (`campagna` \| `evento` \| `comunicato`), data.
-4. **Pubblica**: il sito legge i post via CDN Sanity, di solito senza nuovo deploy.
+4. **Pubblica**: il sito si aggiorna da solo (ISR ~60s; opzionale webhook `/api/revalidate`). Non serve un nuovo deploy per i contenuti.
+5. **Categorie**: documenti Sanity **Categoria novità** (creabili/modificabili); i post le referenziano. Migrazione: `npm run migrate:categories`.
 
 ### CORS (admin)
 

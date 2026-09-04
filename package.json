@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "import:sanity": "node --env-file=.env.local scripts/import-to-sanity.mjs"
+    "import:sanity": "node --env-file=.env.local scripts/import-to-sanity.mjs",
+    "migrate:categories": "node --env-file=.env.local scripts/migrate-categories.mjs"
   },
   "dependencies": {
     "@paypal/react-paypal-js": "^10.3.0",

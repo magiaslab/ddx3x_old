@@ -1,120 +1,155 @@
-# Guida CMS — come pubblicare e modificare i contenuti
+# Guida per pubblicare e modificare le Novità
 
-**Per:** Valentina e chi gestisce i contenuti dell’Associazione  
-**Sito pubblico:** https://www.ddx3x.it  
-**Area di lavoro (Studio):** https://www.ddx3x.it/studio
+**Per:** Valentina  
+**Sito:** https://www.ddx3x.it  
+**Area di lavoro:** https://www.ddx3x.it/studio
 
-Questa guida spiega solo cosa serve per le **Novità** (post). Non serve sapere di programmazione.
+Qui trovi solo i passaggi per entrare, creare, modificare o togliere le **Novità** (campagne, eventi, comunicati). Non serve alcuna conoscenza tecnica.
 
 ---
 
-## 1. Come entrare
+## Parte A — Accedere
 
-1. Apri nel browser: **https://www.ddx3x.it/studio**
-2. Accedi con l’account Google / email che ti è stato autorizzato su Sanity.
-3. Se è la prima volta, accetta i permessi e attendi il caricamento della schermata “DDX3X Italia — CMS”.
+1. Apri il browser (Chrome, Safari, Edge…).
+2. Vai su: **https://www.ddx3x.it/studio**
+3. Accedi con l’account che ti è stato dato (di solito Google / email dell’Associazione).
+4. Attendi che compaia la schermata **DDX3X Italia — CMS**.
 
-**Nota:** non usare più indirizzi `*.vercel.app`. L’indirizzo ufficiale è sempre `www.ddx3x.it/studio`.
+Se non riesci a entrare, scrivi ad **Andrea**: ti aiuterà senza che tu debba cambiare nulla da sola.
 
-### Lingua dell’interfaccia
+### Mettere i menu in italiano
 
-Puoi scegliere **Italiano** o **English** per i menu e i pulsanti di Studio (non riguarda i testi delle novità, che restano come li scrivi tu):
-
-1. In basso a sinistra clicca sul tuo nome / avatar.
-2. Apri la voce sulla lingua (Display language / Lingua).
+1. In basso a sinistra clicca sul tuo **nome** o sull’avatar.
+2. Cerca la voce sulla **lingua** (può dire “Display language” o “Lingua”).
 3. Seleziona **Italiano**.
 
-Se non riesci ad accedere (“CORS” / login che non apre): chiedi ad Andrea di verificare in Sanity Manage → API → CORS che sia presente `https://www.ddx3x.it`.
+I testi delle novità restano come li scrivi tu: questa scelta riguarda solo i pulsanti e i menu.
 
 ---
 
-## 2. Cosa puoi gestire oggi
+## Parte B — Pubblicare una nuova novità
 
-| Cosa | Dove si vede sul sito | Dove si modifica |
-|------|------------------------|------------------|
-| **Novità** (campagne, eventi, comunicati) | https://www.ddx3x.it/novita e in home | Studio → **Novità** |
-| Pagine “fisse” (Chi siamo, Sindrome, Ricerca…) | Varie URL | In parte nello Studio (tipo **Page**), in parte ancora nel sito — se non le trovi, chiedi ad Andrea |
+1. Entra in **https://www.ddx3x.it/studio** (come sopra).
+2. Nel menu a **sinistra** clicca **Novità**.
+3. In alto a destra clicca **Crea** (oppure **Create** / **+**).
+4. Compila i campi uno per uno:
 
-Il lavoro quotidiano più importante è su **Novità**.
+**Titolo**  
+Scrivi il titolo completo della novità.
 
----
+**Slug**  
+È l’indirizzo della pagina sul sito.  
+Clicca **Genera** / **Generate** partendo dal titolo (esempio: “Campagna di Natale 2026” → `campagna-di-natale-2026`).  
+Non lasciare questo campo vuoto. Non usare spazi.
 
-## 3. Pubblicare una nuova novità (passo passo)
+**Estratto**  
+Una o due frasi brevi. Compare nell’elenco novità e nelle anteprime in home.
 
-1. Entra in **https://www.ddx3x.it/studio**
-2. Nel menu a sinistra clicca **Novità**
-3. In alto a destra clicca **Create** / **Crea** (o “+”)
-4. Compila i campi:
+**Corpo** (o Body)  
+Il testo dell’articolo: paragrafi, titoli, elenchi.  
+Scrivi o incolla testo normale. Non incollare pezzi strani o codice dal vecchio sito.
 
-| Campo | Cosa scrivere | Consigli |
-|-------|----------------|----------|
-| **Titolo** | Titolo del pezzo | Chiaro e completo |
-| **Slug** | Indirizzo URL | Clicca **Generate** dal titolo. Es. titolo “Campagna di Natale 2026” → slug `campagna-di-natale-2026`. Non usare spazi né accenti. |
-| **Estratto** | 1–2 frasi | Compare nelle card di home e nell’elenco novità |
-| **Body** / corpo | Testo dell’articolo | Paragrafi, titoli, elenchi. Evita di incollare codice o script da WordPress. |
-| **Immagine di copertina** | Foto / grafica | Carica un JPG o PNG; compila il **testo alternativo** (descrizione breve per accessibilità) |
-| **Categoria** | Una tra: Campagna / Evento / Comunicato | Serve per il badge colorato sul sito |
-| **Data di pubblicazione** | Data e ora | Le novità più recenti appaiono per prime |
+**Immagine di copertina**  
+Carica una foto o una grafica (JPG o PNG).  
+Compila anche il **testo alternativo**: una breve descrizione di cosa si vede nell’immagine (utile per chi usa lettori di schermo).
 
-5. In basso a destra (o in alto) clicca **Publish** / **Pubblica**
+**Categoria**  
+Scegli una categoria dall’elenco (es. Campagna, Evento, Comunicato).  
+Se manca quella che ti serve, vedi sotto **Come aggiungere una categoria**.
+
+**In evidenza**  
+Spunta questa casella se la novità deve comparire nella sezione speciale **In evidenza** (in home, prima delle altre novità, e in cima alla pagina Novità, con una card più grande).  
+Se nessuna novità ha la spunta, la sezione non compare sul sito.
+
+**Data di pubblicazione**  
+Imposta data (e ora, se richiesta). Le novità più recenti compaiono per prime.
+
+5. Quando hai finito, clicca **Pubblica** (o **Publish**).
 6. Controlla sul sito:
-   - elenco: https://www.ddx3x.it/novita
-   - pagina singola: `https://www.ddx3x.it/novita/IL-TUO-SLUG`
+   - elenco: https://www.ddx3x.it/novita  
+   - oppure cerca la novità nell’elenco e aprila.
 
-Di solito **non serve un nuovo deploy**: dopo Publish il sito legge i contenuti aggiornati (a volte serve un refresh o 1–2 minuti).
-
----
-
-## 4. Modificare una novità già online
-
-1. Studio → **Novità**
-2. Clicca il pezzo dall’elenco
-3. Modifica titolo, testo, immagine, data, ecc.
-4. **Publish** di nuovo
-
-Se cambi lo **slug**, cambia anche l’URL pubblico. Meglio non cambiare lo slug di pezzi già condivisi (link Facebook, newsletter, GSC).
+Dopo **Pubblica**, sul sito compare da sola (di solito entro circa un minuto).  
+Non serve chiedere un “deploy” né toccare il codice.  
+Se non lo vedi subito: aspetta un minuto, ricarica la pagina del sito e verifica di aver davvero premuto **Pubblica**.
 
 ---
 
-## 5. Togliere / non mostrare più un pezzo
+## Parte C — Aggiungere o modificare una categoria
 
-- **Unpublish** (togli dalla pubblicazione): il pezzo resta in bozza nello Studio ma non compare sul sito.
-- **Delete**: cancellazione definitiva — usala solo se sei sicura.
+Le categorie (badge colorati sulle novità) si gestiscono da Studio.
 
----
+### Nuova categoria
 
-## 6. Bozze
+1. Nel menu a sinistra clicca **Categoria novità**.
+2. Clicca **Crea**.
+3. Compila:
+   - **Nome** (es. Ricerca, Raccolta fondi…)
+   - **Slug** → clicca **Genera** dal nome
+   - **Colore testo badge** e **Colore sfondo badge** (facoltativi; se li lasci vuoti userà i colori predefiniti)
+4. Clicca **Pubblica**.
 
-Puoi salvare senza pubblicare (stato draft). Sul sito pubblico si vedono **solo** i documenti pubblicati.
+Ora, aprendo una novità, la nuova categoria compare nell’elenco **Categoria**.
 
----
+### Modificare una categoria esistente
 
-## 7. Cosa non fare
+1. Studio → **Categoria novità**
+2. Apri la categoria
+3. Cambia nome o colori
+4. **Pubblica**
 
-- Non incollare pezzi di codice / script da vecchio WordPress nel testo.
-- Non lasciare lo slug vuoto.
-- Non pubblicare senza **data** e **categoria**.
-- Non usare file enormi (meglio immagini sotto 1–2 MB).
-- Non lavorare da `ddx3x-old.vercel.app` — usa sempre `www.ddx3x.it`.
-
----
-
-## 8. Problemi frequenti
-
-| Problema | Cosa provare |
-|----------|----------------|
-| Non vedo il pezzo sul sito | Hai cliccato **Publish**? Aspetta 1–2 minuti e ricarica la pagina (anche con Ctrl/Cmd+Shift+R). |
-| Login Studio non funziona | Usa https://www.ddx3x.it/studio · chiedi di aggiungere CORS · verifica di essere invitata al progetto Sanity. |
-| Lo slug è già usato | Cambia leggermente lo slug (es. aggiungi l’anno). |
-| L’immagine non si vede | Ricaricala; controlla di aver premuto Publish dopo l’upload. |
-| Devo mettere qualcosa “in evidenza” in home | Oggi alcuni box home sono ancora fissi: chiedi ad Andrea se serve un campo “In evidenza” (si può aggiungere). |
+Le novità già collegate a quella categoria si aggiornano da sole sul sito.
 
 ---
 
-## 9. Contatti tecnici
+## Parte D — Modificare una novità già online
 
-Per accessi, CORS, errori Studio o nuove funzioni (evidenze in home, pagine da modificare): **Andrea / Magiaslab**.
+1. Entra in Studio → **Novità**.
+2. Clicca la novità da modificare.
+3. Cambia titolo, testo, immagine, data o categoria.
+4. Clicca di nuovo **Pubblica**.
+
+### Attenzione allo slug
+
+Se modifichi lo **slug** dopo che la novità è già online, cambia anche il link della pagina.  
+Se quel link è già stato condiviso (WhatsApp, Facebook, newsletter), **meglio non toccare lo slug**.
 
 ---
 
-*Documento aggiornato: settembre 2026 — sito Next.js + Sanity Studio.*
+## Parte E — Togliere una novità dal sito (senza cancellarla)
+
+1. Apri la novità in Studio.
+2. Usa **Annulla pubblicazione** / **Unpublish**.
+
+Il pezzo sparisce dal sito ma resta salvato in Studio, così puoi ripubblicarlo più avanti.
+
+### Cancellare del tutto
+
+Usa **Elimina** / **Delete** solo se sei sicura: l’operazione è definitiva.
+
+---
+
+## Parte F — Lavorare in bozza
+
+Puoi scrivere e salvare senza pubblicare.  
+Sul sito pubblico si vedono **solo** le novità pubblicate. Le bozze restano private in Studio.
+
+---
+
+## Parte G — Se qualcosa non va
+
+| Cosa succede | Cosa fare |
+|--------------|-----------|
+| Non vedo la novità sul sito | Controlla di aver cliccato **Pubblica**. Aspetta 1–2 minuti e ricarica la pagina del sito. |
+| Non riesco a entrare in Studio | Scrivi ad Andrea. |
+| Lo slug non è accettato | Cambia leggermente (es. aggiungi l’anno) oppure genera di nuovo dal titolo. |
+| L’immagine non si vede | Ricaricala e pubblica di nuovo. |
+| Non so dove mettere un pezzo “in evidenza” in home | Chiedi ad Andrea: alcune parti della home si gestiscono ancora a parte. |
+
+---
+
+## Contatti
+
+Per accessi, dubbi o problemi: **Andrea**.
+
+*Guida aggiornata: settembre 2026*

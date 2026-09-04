@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
-import { getPosts } from "@/lib/sanity";
+import { getPosts, SANITY_REVALIDATE_SECONDS } from "@/lib/sanity";
 import { siteConfig } from "@/lib/site";
 import { stories } from "@/content/stories";
 import { pubblicazioni } from "@/content/pubblicazioni";
+
+export const revalidate = SANITY_REVALIDATE_SECONDS;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url;

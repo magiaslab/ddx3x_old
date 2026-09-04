@@ -3,10 +3,18 @@ import { notFound } from "next/navigation";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { CategoryBadge, formatDateIt } from "@/components/NewsCard";
 import { JsonLd } from "@/components/JsonLd";
-import { getPostBySlug, getPosts, urlForImage } from "@/lib/sanity";
+import {
+  getPostBySlug,
+  getPosts,
+  SANITY_REVALIDATE_SECONDS,
+  urlForImage,
+} from "@/lib/sanity";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
+
+/** Aggiorna il pezzo dopo Publish su Sanity, senza nuovo deploy. */
+export const revalidate = SANITY_REVALIDATE_SECONDS;
 
 export async function generateStaticParams() {
   const posts = await getPosts();
