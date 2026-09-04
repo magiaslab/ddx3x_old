@@ -3,8 +3,8 @@ import { FeaturedNewsSection } from "@/components/FeaturedNews";
 import { NovitaListing } from "@/components/NovitaListing";
 import { getPosts } from "@/lib/sanity";
 
-/** Aggiorna l’elenco dopo Publish su Sanity, senza nuovo deploy. */
-export const revalidate = 60;
+/** Sempre fresco da Sanity (Publish / Delete senza attendere deploy). */
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Novità",

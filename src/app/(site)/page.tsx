@@ -6,8 +6,8 @@ import { getFeaturedPosts, getLatestPosts } from "@/lib/sanity";
 import { BANK_DETAILS } from "@/lib/campaigns";
 import { siteConfig } from "@/lib/site";
 
-/** Home: le ultime novità da Sanity si aggiornano senza nuovo deploy. */
-export const revalidate = 60;
+/** Sempre fresco da Sanity (Publish / Delete senza attendere deploy). */
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: {

@@ -13,6 +13,15 @@ export const post = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "featured",
+      title: "In evidenza",
+      type: "boolean",
+      description:
+        "Attiva per mostrare questa novità nella sezione “In evidenza” (home e pagina Novità). Se nessuna è attiva, la sezione non compare.",
+      initialValue: false,
+      options: { layout: "switch" },
+    }),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
@@ -42,14 +51,6 @@ export const post = defineType({
       description:
         "Scegli una categoria esistente. Per crearne di nuove: menu Categoria novità.",
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "featured",
-      title: "In evidenza",
-      type: "boolean",
-      description:
-        "Se attivo, la novità compare nella sezione “In evidenza” in home e in cima a Novità (card dedicata). Se nessuna novità è in evidenza, la sezione non compare.",
-      initialValue: false,
     }),
     defineField({
       name: "publishedAt",

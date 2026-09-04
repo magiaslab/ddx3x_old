@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site";
 import { stories } from "@/content/stories";
 import { pubblicazioni } from "@/content/pubblicazioni";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url;

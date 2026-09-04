@@ -3,18 +3,13 @@ import { notFound } from "next/navigation";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { CategoryBadge, formatDateIt } from "@/components/NewsCard";
 import { JsonLd } from "@/components/JsonLd";
-import { getPostBySlug, getPosts, urlForImage } from "@/lib/sanity";
+import { getPostBySlug, urlForImage } from "@/lib/sanity";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
-/** Aggiorna il pezzo dopo Publish su Sanity, senza nuovo deploy. */
-export const revalidate = 60;
-
-export async function generateStaticParams() {
-  const posts = await getPosts();
-  return posts.map((p) => ({ slug: p.slug }));
-}
+/** Sempre fresco da Sanity (Publish / Delete senza attendere deploy). */
+export const dynamic = "force-dynamic";
 
 function postCoverUrl(post: {
   coverImageUrl?: string | null;

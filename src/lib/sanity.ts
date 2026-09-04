@@ -32,8 +32,7 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2025-01-01";
 
-/** Cache ISR: senza questo le pagine restano “congelate” al deploy. */
-export const SANITY_REVALIDATE_SECONDS = 60;
+/** Solo per sviluppo locale senza Sanity configurato. */
 export const SANITY_CACHE_TAG = "sanity";
 
 export const isSanityConfigured = Boolean(
@@ -45,7 +44,6 @@ export const sanityClient = isSanityConfigured
       projectId: projectId!,
       dataset,
       apiVersion,
-      // API diretta: dati freschi a ogni revalidate (no CDN Sanity stale)
       useCdn: false,
       token: process.env.SANITY_API_READ_TOKEN,
     })
@@ -65,11 +63,9 @@ async function sanityFetch<T>(
 ): Promise<T | null> {
   if (!sanityClient) return null;
   try {
+    // no-store: Publish / Unpublish / Delete devono riflettersi subito (niente cache Next)
     return await sanityClient.fetch<T>(query, params, {
-      next: {
-        revalidate: SANITY_REVALIDATE_SECONDS,
-        tags: [SANITY_CACHE_TAG],
-      },
+      cache: "no-store",
     });
   } catch {
     return null;
@@ -145,19 +141,20 @@ const navPagesQuery = `*[_type == "page" && showInNav == true] | order(title asc
 }`;
 
 export async function getPosts(): Promise<Post[]> {
+  if (!isSanityConfigured) return seedPosts.map(enrichPost);
   const fromSanity = await sanityFetch<Post[]>(postsQuery);
-  if (fromSanity && fromSanity.length > 0) {
-    return fromSanity.map(enrichPost);
-  }
-  return seedPosts.map(enrichPost);
+  // Non ripescare i seed: altrimenti un post cancellato in Studio resta online
+  if (!fromSanity) return [];
+  return fromSanity.map(enrichPost);
 }
 
 export async function getFeaturedPosts(): Promise<Post[]> {
-  const fromSanity = await sanityFetch<Post[]>(featuredPostsQuery);
-  if (fromSanity) {
-    return fromSanity.map(enrichPost);
+  if (!isSanityConfigured) {
+    return seedPosts.filter((p) => p.featured).map(enrichPost);
   }
-  return (await getPosts()).filter((p) => p.featured);
+  const fromSanity = await sanityFetch<Post[]>(featuredPostsQuery);
+  if (!fromSanity) return [];
+  return fromSanity.map(enrichPost);
 }
 
 export async function getLatestPosts(
@@ -171,40 +168,50 @@ export async function getLatestPosts(
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
+  if (!isSanityConfigured) {
+    const seed = seedPosts.find((p) => p.slug === slug);
+    return seed ? enrichPost(seed) : null;
+  }
   const fromSanity = await sanityFetch<Post | null>(postBySlugQuery, { slug });
-  if (fromSanity) return enrichPost(fromSanity);
-  const seed = seedPosts.find((p) => p.slug === slug);
-  return seed ? enrichPost(seed) : null;
+  // Nessun fallback seed: delete/unpublish → 404
+  return fromSanity ? enrichPost(fromSanity) : null;
 }
 
 export async function getPages(): Promise<CmsPage[]> {
+  if (!isSanityConfigured) {
+    return seedPages.map((p) => enrichPage({ ...p }));
+  }
   const fromSanity = await sanityFetch<CmsPage[]>(pagesQuery);
-  if (fromSanity && fromSanity.length > 0) return fromSanity.map(enrichPage);
-  return seedPages.map((p) => enrichPage({ ...p }));
+  if (!fromSanity) return [];
+  return fromSanity.map(enrichPage);
 }
 
 export async function getPageBySlug(slug: string): Promise<CmsPage | null> {
+  if (!isSanityConfigured) {
+    const seed = seedPages.find((p) => p.slug === slug);
+    return seed ? enrichPage({ ...seed }) : null;
+  }
   const fromSanity = await sanityFetch<CmsPage | null>(pageBySlugQuery, {
     slug,
   });
-  if (fromSanity) return enrichPage(fromSanity);
-  const seed = seedPages.find((p) => p.slug === slug);
-  return seed ? enrichPage({ ...seed }) : null;
+  return fromSanity ? enrichPage(fromSanity) : null;
 }
 
 export async function getNavPages(): Promise<
   Pick<CmsPage, "title" | "slug" | "navLabel" | "navGroup">[]
 > {
+  if (!isSanityConfigured) {
+    return seedPages
+      .filter((p) => p.showInNav)
+      .map(({ title, slug, navLabel, navGroup }) => ({
+        title,
+        slug,
+        navLabel,
+        navGroup,
+      }));
+  }
   const fromSanity = await sanityFetch<
     Pick<CmsPage, "title" | "slug" | "navLabel" | "navGroup">[]
   >(navPagesQuery);
-  if (fromSanity) return fromSanity;
-  return seedPages
-    .filter((p) => p.showInNav)
-    .map(({ title, slug, navLabel, navGroup }) => ({
-      title,
-      slug,
-      navLabel,
-      navGroup,
-    }));
+  return fromSanity ?? [];
 }

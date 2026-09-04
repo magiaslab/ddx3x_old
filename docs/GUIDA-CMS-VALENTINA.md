@@ -37,6 +37,10 @@ I testi delle novità restano come li scrivi tu: questa scelta riguarda solo i p
 **Titolo**  
 Scrivi il titolo completo della novità.
 
+**In evidenza**  
+Subito sotto il titolo c’è l’interruttore **In evidenza**. Accendilo se la novità deve comparire nella sezione speciale (home e cima di Novità).  
+Se nessuna novità ha l’interruttore acceso, quella sezione non compare sul sito.
+
 **Slug**  
 È l’indirizzo della pagina sul sito.  
 Clicca **Genera** / **Generate** partendo dal titolo (esempio: “Campagna di Natale 2026” → `campagna-di-natale-2026`).  
@@ -57,10 +61,6 @@ Compila anche il **testo alternativo**: una breve descrizione di cosa si vede ne
 Scegli una categoria dall’elenco (es. Campagna, Evento, Comunicato).  
 Se manca quella che ti serve, vedi sotto **Come aggiungere una categoria**.
 
-**In evidenza**  
-Spunta questa casella se la novità deve comparire nella sezione speciale **In evidenza** (in home, prima delle altre novità, e in cima alla pagina Novità, con una card più grande).  
-Se nessuna novità ha la spunta, la sezione non compare sul sito.
-
 **Data di pubblicazione**  
 Imposta data (e ora, se richiesta). Le novità più recenti compaiono per prime.
 
@@ -69,10 +69,7 @@ Imposta data (e ora, se richiesta). Le novità più recenti compaiono per prime.
    - elenco: https://www.ddx3x.it/novita  
    - oppure cerca la novità nell’elenco e aprila.
 
-Dopo **Pubblica**, sul sito compare da sola (di solito entro circa un minuto).  
-Non serve chiedere un “deploy” né toccare il codice.  
-Se non lo vedi subito: aspetta un minuto, ricarica la pagina del sito e verifica di aver davvero premuto **Pubblica**.
-
+Dopo **Pubblica** (o dopo una cancellazione), il sito si aggiorna da solo: ricarica la pagina. Non serve un deploy.
 ---
 
 ## Parte C — Aggiungere o modificare una categoria
