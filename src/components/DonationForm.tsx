@@ -143,30 +143,79 @@ export function DonationForm() {
 
       <section className="rounded-[18px] border border-[var(--border)] bg-white p-6 md:p-7">
         <h2 className="font-serif text-xl font-semibold text-[var(--ink)]">
-          Metodo di pagamento
+          Come vuoi donare?
         </h2>
-        <div className="mt-4 flex flex-wrap gap-2.5">
+        <p className="mt-1.5 text-sm text-[var(--gray-600)]">
+          Scegli un metodo, poi conferma l&apos;importo con il pulsante sotto.
+        </p>
+
+        <div
+          className="mt-4 grid gap-2.5 sm:grid-cols-2"
+          role="radiogroup"
+          aria-label="Metodo di pagamento"
+        >
           <button
             type="button"
+            role="radio"
+            aria-checked={method === "stripe"}
             onClick={() => setMethod("stripe")}
-            className={`rounded-xl border px-5 py-2.5 text-sm font-semibold transition ${
+            className={`flex cursor-pointer flex-col items-start gap-1 rounded-xl border p-3.5 text-left transition ${
               method === "stripe"
-                ? "border-[var(--purple-600)] bg-[var(--purple-600)] text-white"
-                : "border-[#E2D9F0] text-[#3A3247] hover:border-[#B7A3D9]"
+                ? "border-[var(--purple-600)] bg-[var(--purple-50)]"
+                : "border-[var(--border)] bg-white hover:border-[#D9CBEF]"
             }`}
           >
-            Carta di credito (Stripe)
+            <span className="flex items-center gap-2.5">
+              <span
+                className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 ${
+                  method === "stripe"
+                    ? "border-[var(--purple-600)]"
+                    : "border-[#C8BDD8]"
+                }`}
+                aria-hidden
+              >
+                {method === "stripe" ? (
+                  <span className="h-2 w-2 rounded-full bg-[var(--purple-600)]" />
+                ) : null}
+              </span>
+              <span className="font-semibold text-[var(--ink)]">
+                Carta di credito
+              </span>
+            </span>
+            <span className="pl-[26px] text-[13px] text-[var(--gray-600)]">
+              Pagamento sicuro online (Visa, Mastercard…)
+            </span>
           </button>
+
           <button
             type="button"
+            role="radio"
+            aria-checked={method === "paypal"}
             onClick={() => setMethod("paypal")}
-            className={`rounded-xl border px-5 py-2.5 text-sm font-semibold transition ${
+            className={`flex cursor-pointer flex-col items-start gap-1 rounded-xl border p-3.5 text-left transition ${
               method === "paypal"
-                ? "border-[var(--purple-600)] bg-[var(--purple-600)] text-white"
-                : "border-[#E2D9F0] text-[#3A3247] hover:border-[#B7A3D9]"
+                ? "border-[var(--purple-600)] bg-[var(--purple-50)]"
+                : "border-[var(--border)] bg-white hover:border-[#D9CBEF]"
             }`}
           >
-            PayPal
+            <span className="flex items-center gap-2.5">
+              <span
+                className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 ${
+                  method === "paypal"
+                    ? "border-[var(--purple-600)]"
+                    : "border-[#C8BDD8]"
+                }`}
+                aria-hidden
+              >
+                {method === "paypal" ? (
+                  <span className="h-2 w-2 rounded-full bg-[var(--purple-600)]" />
+                ) : null}
+              </span>
+              <span className="font-semibold text-[var(--ink)]">PayPal</span>
+            </span>
+            <span className="pl-[26px] text-[13px] text-[var(--gray-600)]">
+              Usa il tuo account PayPal
+            </span>
           </button>
         </div>
 
@@ -179,65 +228,81 @@ export function DonationForm() {
           </p>
         ) : null}
 
-        <div className="mt-6">
+        <div className="mt-5 border-t border-[var(--border)] pt-5">
+          <p className="mb-3 text-[13px] font-semibold uppercase tracking-[0.04em] text-[var(--gray-400)]">
+            Conferma e paga
+          </p>
           {method === "stripe" ? (
-            <button
-              type="button"
-              disabled={loading}
-              onClick={startStripeCheckout}
-              className="btn-pill btn-primary w-full px-7 py-3.5 text-[15px] disabled:opacity-60 sm:w-auto"
-            >
-              {loading
-                ? "Reindirizzamento…"
-                : `Dona €${Number.isFinite(resolvedAmount) ? resolvedAmount : "—"} con Stripe`}
-            </button>
+            <>
+              <button
+                type="button"
+                disabled={loading}
+                onClick={startStripeCheckout}
+                className="btn-pill btn-primary w-full px-7 py-3.5 text-[15px] disabled:opacity-60"
+              >
+                {loading
+                  ? "Apertura pagamento sicuro…"
+                  : `Procedi e dona €${Number.isFinite(resolvedAmount) ? resolvedAmount : "—"}`}
+              </button>
+              <p className="mt-2.5 text-[13px] text-[var(--gray-600)]">
+                Verrai portato su una pagina sicura per inserire i dati della
+                carta.
+              </p>
+            </>
           ) : paypalClientId ? (
-            <PayPalScriptProvider
-              options={{
-                clientId: paypalClientId,
-                currency: "EUR",
-                intent: "capture",
-              }}
-            >
-              <PayPalButtons
-                style={{ layout: "vertical", shape: "pill", color: "gold" }}
-                disabled={!resolvedAmount || resolvedAmount < 1}
-                createOrder={(_data, actions) =>
-                  actions.order.create({
-                    intent: "CAPTURE",
-                    purchase_units: [
-                      {
-                        amount: {
-                          currency_code: "EUR",
-                          value: resolvedAmount.toFixed(2),
+            <>
+              <p className="mb-3 text-[13px] text-[var(--gray-600)]">
+                Clicca il pulsante PayPal qui sotto per completare la donazione
+                di{" "}
+                <strong>
+                  €{Number.isFinite(resolvedAmount) ? resolvedAmount : "—"}
+                </strong>
+                .
+              </p>
+              <PayPalScriptProvider
+                options={{
+                  clientId: paypalClientId,
+                  currency: "EUR",
+                  intent: "capture",
+                }}
+              >
+                <PayPalButtons
+                  style={{ layout: "vertical", shape: "pill", color: "gold" }}
+                  disabled={!resolvedAmount || resolvedAmount < 1}
+                  createOrder={(_data, actions) =>
+                    actions.order.create({
+                      intent: "CAPTURE",
+                      purchase_units: [
+                        {
+                          amount: {
+                            currency_code: "EUR",
+                            value: resolvedAmount.toFixed(2),
+                          },
+                          description: `Donazione DDX3X — ${campaign?.name}`,
+                          custom_id: campaignId,
                         },
-                        description: `Donazione DDX3X — ${campaign?.name}`,
-                        custom_id: campaignId,
-                      },
-                    ],
-                  })
-                }
-                onApprove={async (_data, actions) => {
-                  await actions.order?.capture();
-                  window.location.href = "/dona/grazie";
-                }}
-                onCancel={() => {
-                  window.location.href = "/dona/annullato";
-                }}
-                onError={() => {
-                  setError(
-                    "Errore PayPal. Riprova o usa Stripe / bonifico.",
-                  );
-                }}
-              />
-            </PayPalScriptProvider>
+                      ],
+                    })
+                  }
+                  onApprove={async (_data, actions) => {
+                    await actions.order?.capture();
+                    window.location.href = "/dona/grazie";
+                  }}
+                  onCancel={() => {
+                    window.location.href = "/dona/annullato";
+                  }}
+                  onError={() => {
+                    setError(
+                      "Errore PayPal. Riprova oppure scegli carta di credito o bonifico.",
+                    );
+                  }}
+                />
+              </PayPalScriptProvider>
+            </>
           ) : (
             <p className="text-sm text-[var(--gray-600)]">
-              PayPal non configurato: imposta{" "}
-              <code className="rounded bg-[var(--purple-50)] px-1.5 py-0.5 text-[var(--purple-700)]">
-                NEXT_PUBLIC_PAYPAL_CLIENT_ID
-              </code>{" "}
-              nelle variabili d&apos;ambiente.
+              PayPal non è al momento disponibile. Usa la carta di credito o il
+              bonifico.
             </p>
           )}
         </div>
@@ -245,26 +310,51 @@ export function DonationForm() {
 
       <section className="rounded-[18px] border border-dashed border-[var(--amber-border)] bg-[var(--amber-tint)] p-6 text-sm text-[#5C4E32] md:p-7">
         <h2 className="font-serif text-lg font-semibold text-[var(--ink)]">
-          Oppure via bonifico
+          Preferisci il bonifico?
         </h2>
-        <p className="mt-2.5 leading-relaxed">
-          <strong className="text-[var(--ink)]">{BANK_DETAILS.beneficiary}</strong>
-          <br />
-          {BANK_DETAILS.bank}
-          <br />
-          IBAN:{" "}
-          <code className="rounded bg-white/70 px-1.5 py-0.5 font-mono text-[13px]">
-            {BANK_DETAILS.iban}
-          </code>
-          <br />
-          Causale: {BANK_DETAILS.causale}
+        <p className="mt-1.5 text-[13.5px] leading-relaxed">
+          Nessun pagamento online: usa questi dati dalla tua banca o app.
         </p>
-        <p className="mt-3">
-          5×1000 — Codice fiscale:{" "}
-          <strong className="font-mono text-[#6B4F12]">
-            {BANK_DETAILS.codiceFiscale}
-          </strong>
-        </p>
+        <dl className="mt-4 space-y-3">
+          <div>
+            <dt className="text-[12px] font-semibold uppercase tracking-[0.04em] text-[#8A7340]">
+              Intestatario
+            </dt>
+            <dd className="mt-0.5 font-semibold text-[var(--ink)]">
+              {BANK_DETAILS.beneficiary}
+            </dd>
+          </div>
+          <div>
+            <dt className="text-[12px] font-semibold uppercase tracking-[0.04em] text-[#8A7340]">
+              Banca
+            </dt>
+            <dd className="mt-0.5">{BANK_DETAILS.bank}</dd>
+          </div>
+          <div>
+            <dt className="text-[12px] font-semibold uppercase tracking-[0.04em] text-[#8A7340]">
+              IBAN
+            </dt>
+            <dd className="mt-1">
+              <code className="inline-block break-all rounded-lg bg-white px-2.5 py-1.5 font-mono text-[13px] text-[var(--ink)]">
+                {BANK_DETAILS.iban}
+              </code>
+            </dd>
+          </div>
+          <div>
+            <dt className="text-[12px] font-semibold uppercase tracking-[0.04em] text-[#8A7340]">
+              Causale
+            </dt>
+            <dd className="mt-0.5">{BANK_DETAILS.causale}</dd>
+          </div>
+          <div>
+            <dt className="text-[12px] font-semibold uppercase tracking-[0.04em] text-[#8A7340]">
+              5×1000 — Codice fiscale
+            </dt>
+            <dd className="mt-0.5 font-mono font-semibold text-[#6B4F12]">
+              {BANK_DETAILS.codiceFiscale}
+            </dd>
+          </div>
+        </dl>
       </section>
     </div>
   );
