@@ -223,7 +223,10 @@ export function Header({ items = mainNavigation }: { items?: NavItem[] }) {
           id={`${navId}-mobile`}
           className="ddx-mobile-panel border-t border-[var(--border)] bg-white"
         >
-          <div className="mx-auto max-h-[min(78vh,640px)] max-w-[1240px] overflow-y-auto overscroll-contain px-4 py-3 sm:px-6 md:px-8">
+          <div
+            data-lenis-prevent
+            className="mx-auto max-h-[min(78vh,640px)] max-w-[1240px] overflow-y-auto overscroll-contain px-4 py-3 sm:px-6 md:px-8"
+          >
             {navItems.map((item) => (
               <div key={item.label} className="border-b border-[#F3EFE7] py-1">
                 {item.children ? (

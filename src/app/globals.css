@@ -52,6 +52,11 @@
   --font-serif: var(--font-lora);
 }
 
+/* Ancore (#sezione) sotto l'header fisso */
+[id] {
+  scroll-margin-top: 96px;
+}
+
 ::selection {
   background: #e3d9f5;
 }
