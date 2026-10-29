@@ -1,5 +1,6 @@
 import { defineType, defineField } from "sanity";
 import { portableBodyField } from "./portableBody";
+import { attachmentsField } from "./attachment";
 
 export const post = defineType({
   name: "post",
@@ -36,6 +37,7 @@ export const post = defineType({
       description: "Breve riassunto per le card in home e nell'elenco novità",
     }),
     portableBodyField,
+    attachmentsField,
     defineField({
       name: "coverImage",
       title: "Immagine di copertina",

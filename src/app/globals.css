@@ -406,3 +406,93 @@ a.btn-link:hover {
   color: var(--gray-600);
   font-style: italic;
 }
+
+/* Documenti scaricabili (campo "Documenti allegati" e blocco nel testo) */
+.prose-ddx .doc-section {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.prose-ddx .doc-section h2 {
+  margin-top: 0;
+}
+
+.prose-ddx .doc-list {
+  margin: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.prose-ddx .doc-list li {
+  margin: 0;
+}
+
+.prose-ddx a.doc-card,
+a.doc-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin: 0.75rem 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--white);
+  color: var(--gray-600);
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.prose-ddx .doc-list a.doc-card {
+  margin: 0;
+}
+
+.prose-ddx a.doc-card:hover,
+a.doc-card:hover {
+  border-color: var(--purple-500);
+  background: var(--purple-50);
+  color: var(--gray-600);
+}
+
+a.doc-card:focus-visible {
+  outline: 2px solid var(--purple-600);
+  outline-offset: 2px;
+}
+
+.doc-card__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  background: var(--purple-100);
+  color: var(--purple-700);
+}
+
+.doc-card__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.4;
+}
+
+.doc-card__title {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.doc-card__desc {
+  margin-top: 0.15rem;
+  font-size: 0.92em;
+}
+
+.doc-card__meta {
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--gray-400);
+}

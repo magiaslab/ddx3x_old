@@ -13,6 +13,10 @@ import {
   sanitizePortableBody,
 } from "@/lib/sanitize-content";
 import { rewriteWpHtml } from "@/lib/rewrite-wp-html";
+import {
+  attachmentProjection,
+  type Attachment,
+} from "@/components/Attachments";
 
 export type { Post, PortableTextBlock };
 
@@ -23,6 +27,7 @@ export type CmsPage = {
   seoDescription?: string;
   body?: PortableTextBlock[];
   bodyHtml?: string;
+  attachments?: Attachment[];
   showInNav?: boolean;
   navLabel?: string;
   navGroup?: string;
@@ -72,8 +77,13 @@ async function sanityFetch<T>(
   }
 }
 
+/** Body con i blocchi documento già risolti (url, estensione, peso). */
+const bodyProjection = `body[]{ ..., _type == "attachment" => { ${attachmentProjection} } }`;
+
+const attachmentsProjection = `attachments[]{ ${attachmentProjection} }`;
+
 const postProjection = `{
-  _id, title, "slug": slug.current, excerpt, body,
+  _id, title, "slug": slug.current, excerpt, ${bodyProjection}, ${attachmentsProjection},
   coverImage{ alt, asset->{ url } },
   "category": select(
     defined(category->_id) => {
@@ -129,11 +139,11 @@ function enrichPage(page: CmsPage): CmsPage {
 }
 
 const pagesQuery = `*[_type == "page"] | order(title asc) {
-  _id, title, "slug": slug.current, seoDescription, body, bodyHtml, showInNav, navLabel, navGroup
+  _id, title, "slug": slug.current, seoDescription, ${bodyProjection}, bodyHtml, ${attachmentsProjection}, showInNav, navLabel, navGroup
 }`;
 
 const pageBySlugQuery = `*[_type == "page" && slug.current == $slug][0] {
-  _id, title, "slug": slug.current, seoDescription, body, bodyHtml, showInNav, navLabel, navGroup
+  _id, title, "slug": slug.current, seoDescription, ${bodyProjection}, bodyHtml, ${attachmentsProjection}, showInNav, navLabel, navGroup
 }`;
 
 const navPagesQuery = `*[_type == "page" && showInNav == true] | order(title asc) {

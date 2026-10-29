@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
+import { AttachmentCard, AttachmentList } from "@/components/Attachments";
 import { CategoryBadge, formatDateIt } from "@/components/NewsCard";
 import { JsonLd } from "@/components/JsonLd";
 import { getPostBySlug, urlForImage } from "@/lib/sanity";
@@ -63,6 +64,9 @@ const portableComponents: PortableTextComponents = {
       </a>
     ),
   },
+  types: {
+    attachment: ({ value }) => <AttachmentCard file={value} />,
+  },
 };
 
 export default async function PostPage({ params }: Props) {
@@ -124,6 +128,7 @@ export default async function PostPage({ params }: Props) {
       ) : null}
       <div className="prose-ddx max-w-[65ch]">
         <PortableText value={post.body} components={portableComponents} />
+        <AttachmentList files={post.attachments} />
       </div>
     </main>
   );

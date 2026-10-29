@@ -49,5 +49,7 @@ export const portableBodyField = defineField({
       options: { hotspot: true },
       fields: [{ name: "alt", type: "string", title: "Testo alternativo" }],
     }),
+    // Documento scaricabile nel punto scelto del testo
+    defineArrayMember({ type: "attachment" }),
   ],
 });

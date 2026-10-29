@@ -1,5 +1,6 @@
 import { defineType, defineField } from "sanity";
 import { portableBodyField } from "./portableBody";
+import { attachmentsField } from "./attachment";
 
 export const page = defineType({
   name: "page",
@@ -38,6 +39,7 @@ export const page = defineType({
       hidden: ({ value, document }) =>
         !value && Boolean(document?.body && Array.isArray(document.body) && document.body.length),
     }),
+    attachmentsField,
     defineField({
       name: "showInNav",
       title: "Mostra nel menu",

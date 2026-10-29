@@ -1,5 +1,6 @@
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import type { ReactNode } from "react";
+import { AttachmentCard, AttachmentList } from "@/components/Attachments";
 import { ConferenceRegistrationTracker } from "@/components/ConferenceRegistrationTracker";
 import { PageShell } from "@/components/PageShell";
 import type { CmsPage } from "@/lib/sanity";
@@ -36,6 +37,7 @@ const portableComponents: PortableTextComponents = {
       // eslint-disable-next-line @next/next/no-img-element
       return <img src={src} alt={value?.alt || ""} />;
     },
+    attachment: ({ value }) => <AttachmentCard file={value} />,
   },
 };
 
@@ -67,6 +69,7 @@ export function CmsPageView({
       ) : (
         <p>Contenuto non ancora disponibile.</p>
       )}
+      <AttachmentList files={page.attachments} />
     </PageShell>
   );
 }

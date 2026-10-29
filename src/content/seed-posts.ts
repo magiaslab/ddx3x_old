@@ -1,4 +1,6 @@
 /** Valori legacy usati nel seed e nei post pre-migrazione. */
+import type { Attachment } from "@/components/Attachments";
+
 export type PostCategorySlug = "campagna" | "evento" | "comunicato";
 
 export type PostCategory = {
@@ -23,6 +25,8 @@ export type Post = {
   slug: string;
   excerpt: string;
   body: PortableTextBlock[];
+  /** Documenti scaricabili in fondo alla novità. */
+  attachments?: Attachment[];
   coverImageUrl?: string;
   coverImage?: {
     asset?: { _ref?: string; url?: string };
