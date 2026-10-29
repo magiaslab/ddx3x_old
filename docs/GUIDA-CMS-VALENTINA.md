@@ -1,4 +1,4 @@
-# Guida per pubblicare e modificare le Novità
+# Guida per pubblicare e modificare Novità e Pagine
 
 **Per:** Valentina  
 **Sito:** https://www.ddx3x.it  
@@ -133,7 +133,34 @@ Sul sito pubblico si vedono **solo** le novità pubblicate. Le bozze restano pri
 
 ---
 
-## Parte G — Se qualcosa non va
+## Parte G — Allegare documenti (PDF, Word, Excel…)
+
+Funziona sia nelle **Novità** sia nelle **Pagine** (Bilanci, Statuto, ecc.).
+
+### Elenco in fondo alla pagina
+
+1. Apri la novità o la pagina in Studio.
+2. Scorri fino a **Documenti allegati** e clicca **Aggiungi elemento** (o **Add item**).
+3. Carica il file (trascinalo o sceglilo dal computer).
+4. Scrivi il **Titolo del documento**: è quello che si legge sul sito, es. “Bilancio 2025”.
+5. Se serve, aggiungi una **Descrizione breve** (una riga).
+6. Clicca **Pubblica**.
+
+Sul sito i file compaiono in fondo, sotto **Documenti**, con il tipo e il peso (es. “PDF · 1,2 MB”).  
+Per cambiare l’ordine, trascina i documenti nell’elenco.
+
+### Documento in mezzo al testo
+
+Nell’editor del contenuto clicca **+** (o **Insert**) e scegli **Documento**: la scheda del file compare esattamente in quel punto del testo.  
+Nelle pagine arrivate dal vecchio sito (quelle con il campo **Contenuto HTML**) usa invece **Documenti allegati**.
+
+### File accettati
+
+PDF, Word, Excel, PowerPoint, OpenOffice, CSV e ZIP.
+
+---
+
+## Parte H — Se qualcosa non va
 
 | Cosa succede | Cosa fare |
 |--------------|-----------|
@@ -149,4 +176,4 @@ Sul sito pubblico si vedono **solo** le novità pubblicate. Le bozze restano pri
 
 Per accessi, dubbi o problemi: **Andrea**.
 
-*Guida aggiornata: settembre 2026*
+*Guida aggiornata: ottobre 2026*
