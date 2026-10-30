@@ -274,7 +274,7 @@ export default async function HomePage() {
                 di Torino.
               </p>
               <Link
-                href="/ricerca/italia#telethon-brusco"
+                href="/ricerca/italia#fondazione-telethon-e-dott-alfredo-brusco"
                 className="btn-pill btn-primary w-full px-6 py-3 sm:w-auto"
               >
                 Scopri il progetto →

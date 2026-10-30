@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PortableText, type PortableTextComponents } from "@portabletext/react";
-import { AttachmentCard, AttachmentList } from "@/components/Attachments";
+import { PortableText } from "@portabletext/react";
+import { AttachmentList } from "@/components/Attachments";
+import { portableComponents } from "@/components/portableText";
 import { CategoryBadge, formatDateIt } from "@/components/NewsCard";
 import { JsonLd } from "@/components/JsonLd";
 import { getPostBySlug, urlForImage } from "@/lib/sanity";
@@ -49,25 +50,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   });
 }
-
-const portableComponents: PortableTextComponents = {
-  block: {
-    h2: ({ children }) => <h2>{children}</h2>,
-    h3: ({ children }) => <h3>{children}</h3>,
-    normal: ({ children }) => <p>{children}</p>,
-    blockquote: ({ children }) => <blockquote>{children}</blockquote>,
-  },
-  marks: {
-    link: ({ children, value }) => (
-      <a href={value?.href} target="_blank" rel="noreferrer">
-        {children}
-      </a>
-    ),
-  },
-  types: {
-    attachment: ({ value }) => <AttachmentCard file={value} />,
-  },
-};
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;

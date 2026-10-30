@@ -1,45 +1,11 @@
-import { PortableText, type PortableTextComponents } from "@portabletext/react";
+import { PortableText } from "@portabletext/react";
 import type { ReactNode } from "react";
-import { AttachmentCard, AttachmentList } from "@/components/Attachments";
+import { AttachmentList } from "@/components/Attachments";
 import { ConferenceRegistrationTracker } from "@/components/ConferenceRegistrationTracker";
 import { PageShell } from "@/components/PageShell";
+import { portableComponents } from "@/components/portableText";
 import type { CmsPage } from "@/lib/sanity";
-import { urlForImage } from "@/lib/sanity";
 import { rewriteWpHtml } from "@/lib/rewrite-wp-html";
-
-const portableComponents: PortableTextComponents = {
-  block: {
-    h2: ({ children }) => <h2>{children}</h2>,
-    h3: ({ children }) => <h3>{children}</h3>,
-    normal: ({ children }) => <p>{children}</p>,
-    blockquote: ({ children }) => <blockquote>{children}</blockquote>,
-  },
-  marks: {
-    link: ({ children, value }) => {
-      const href = rewriteWpHtml(value?.href || "#");
-      const external = /^https?:\/\//i.test(href);
-      return (
-        <a
-          href={href}
-          {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-        >
-          {children}
-        </a>
-      );
-    },
-  },
-  types: {
-    image: ({ value }) => {
-      const src = value?.asset
-        ? urlForImage(value)?.width(1200).url()
-        : null;
-      if (!src) return null;
-      // eslint-disable-next-line @next/next/no-img-element
-      return <img src={src} alt={value?.alt || ""} />;
-    },
-    attachment: ({ value }) => <AttachmentCard file={value} />,
-  },
-};
 
 export function CmsPageView({
   page,

@@ -10,6 +10,7 @@ export const portableBodyField = defineField({
       type: "block",
       styles: [
         { title: "Normale", value: "normal" },
+        { title: "Titolo sezione (grande, con riga sopra)", value: "section" },
         { title: "Titolo 2", value: "h2" },
         { title: "Titolo 3", value: "h3" },
         { title: "Citazione", value: "blockquote" },
@@ -17,6 +18,7 @@ export const portableBodyField = defineField({
       lists: [
         { title: "Elenco", value: "bullet" },
         { title: "Numerato", value: "number" },
+        { title: "Indice della pagina (riquadro verde)", value: "index" },
       ],
       marks: {
         decorators: [
@@ -38,6 +40,12 @@ export const portableBodyField = defineField({
                     allowRelative: true,
                     scheme: ["http", "https", "mailto"],
                   }),
+              },
+              {
+                name: "button",
+                type: "boolean",
+                title: "Mostra come pulsante",
+                initialValue: false,
               },
             ],
           },
